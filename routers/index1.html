@@ -1,0 +1,47 @@
+{{ define "index.html" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//unpkg.com/layui@2.12.1/dist/css/layui.css" rel="stylesheet">
+
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home Index</h1>
+<div class="../../static/css/layui.css">
+<div class="pod-cards">
+    {{ range $pod := .Podlist }}
+    <div class="pod-card">
+        <h3>{{ $pod.Name }}</h3>
+        <p><strong>Namespace:</strong> {{ $pod.Namespace }}</p>
+        <p><strong>Status:</strong> {{ $pod.Status }}</p>
+        <p><strong>Node:</strong> {{ $pod.NodeName }}</p>
+        <p><strong>Pod IP:</strong> Pod {{ $pod.PodIP }},
+        <p><strong>Host IP:</strong> Pod {{ $pod.HostIP }},
+        <p><strong>Host IP:</strong> Pod {{ $pod.HostIP }},
+        <p><strong>Start Time:</strong> {{ $pod.StartTime }}</p>
+        <br></br>
+        ------------------------------------------------------------
+        
+    </div>
+    {{ end }}
+
+</div>
+</div>
+
+    <p>Welcome to the Administor page!</p>
+    <!-- HTML Content -->
+  <script src="//unpkg.com/layui@2.12.1/dist/layui.js"></script>
+  <script>
+  // Usage
+  layui.use(function(){
+    var layer = layui.layer;
+    // Welcome
+    layer.msg('Hello World', {icon: 6});
+  });
+  </script>
+</body>
+</html>
+{{ end }}

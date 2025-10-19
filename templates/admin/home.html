@@ -1,0 +1,32 @@
+{{ define "home.html" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home Admin index</h1>
+
+<div class="pod-cards">
+    {{ range $pod := .Podlist }}
+    <div class="pod-card">
+        <h3>{{ $pod.Name }}</h3>
+        <p><strong>Namespace:</strong> {{ $pod.Namespace }}</p>
+        <p><strong>Status:</strong> {{ $pod.Status }}</p>
+        <p><strong>Node:</strong> {{ $pod.NodeName }}</p>
+        <p><strong>Pod IP:</strong> Pod {{ $pod.PodIP }},
+        <p><strong>Host IP:</strong> Pod {{ $pod.HostIP }},
+        <p><strong>Start Time:</strong> {{ $pod.StartTime }}</p>
+        <br></br>
+        ------------------------------------------------------------
+        
+    </div>
+    {{ end }}
+    
+</div>
+    <p>Welcome to the home page!</p>
+</body>
+</html>
+{{ end }}
