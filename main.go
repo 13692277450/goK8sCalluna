@@ -1,3 +1,16 @@
+/*
+Version: 0.01
+Author: Mang Zhang, Shenzhen China
+Release Date: 2025-10-19
+Project Name: GoK8sCalluna
+Description: A tool to help mange K8s.
+Copy Rights: MIT License
+Email: m13692277450@outlook.com
+Mobile: +86-13692277450
+HomePage: www.pavogroup.top
+
+*/
+
 package main
 
 import (
