@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mynginx
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: mynginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mynginx
+    spec:
+      containers:
+        - name: myngx-container
+          image: nginx:1.2-alpine
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,76 @@
+{{ define "index.html" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/ming.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <div >
+    <!-- <div class="pod-cards">
+        <div class="pod-card">
+
+            <h1>Home Admin index</h1>
+            pvcList1: {{range $pvc := .PvcList}}
+            <h3>
+                PvcName: {{ $pvc.Name}}
+            </h3>
+            {{end}}
+        </div>
+    </div> -->
+    <div class="pod-cards">
+        {{ range $pod := .Podlist }}
+        <div class="pod-card">
+            <h3 style="color: blueviolet;">{{ $pod.Name }}</h3>
+            <p><strong>Namespace:</strong> {{ $pod.Namespace }}</p>
+            <p><strong>Status:</strong> {{ $pod.Status }}</p>
+            <p><strong>Node:</strong> {{ $pod.NodeName }}</p>
+            <p><strong>Pod IP:</strong> Pod {{ $pod.PodIP }},
+            <p><strong>Host IP:</strong> Pod {{ $pod.HostIP }},
+            <p><strong>Start Time:</strong> {{ $pod.StartTime }}</p>
+        </div>
+        {{ end }}
+    </div>
+    <!-- <div class="pod-cards">
+        {{ range $pvc := .PVCList }}
+        <div class="pod-card">
+            <h3>{{ $pvc.Name }}</h3>
+            <p><strong>NameSpace:</strong> {{ $pvc.NameSpace }}</p>
+            <p><strong>Status:</strong> {{ $pvc.NameSpace }}</p>
+            <br></br>
+            ------------------------------------------------------------
+        </div>
+        {{ end }}
+    </div> -->
+     <h1>Resources List</h1>
+        <br></br>
+    <div class="pod-cards">
+        {{ range $resources := .ResourcesList }}
+        <div class="pod-card">
+            <p style="color: blueviolet; font-size:large;"><strong>Resouces Name: </strong>{{ $resources.Name }}</p>
+            <p><strong>Resources Kind:</strong>{{$resources.Kind}}</p>
+            <p><strong>Resources SingularName:</strong>{{$resources.SingularName}}</p>
+            <p><strong>Resources StorageVersionHash:</strong>{{$resources.StorageVersionHash}}</p>
+            <p><strong>Resources Version:</strong>{{$resources.ResourcesVersion}}</p>
+            <p><strong>Resources ShortNames:</strong>{{$resources.ShortNames}}</p>
+            <p><strong>Resources Categories:</strong>{{$resources.Categories}}</p>
+            <p><strong>Resources DeepCopyGroup:</strong>{{$resources.DeepCopyGroup}}</p>
+            <p><strong>Resources DeepCopyName:</strong>{{$resources.DeepCopyName}}</p>
+            <p><strong>Resources Verbs:</strong>{{$resources.Verbs}}</p>
+            <p><strong>Resources Namespaced:</strong>{{$resources.Namespaced}}</p>
+            <p><strong>Resources ResouceSize:</strong>{{$resources.ResouceSize}}</p>
+            <p><strong>Group Name:</strong> {{ $resources.Group }}</p>
+            <p><strong>Group Version:</strong> {{ $resources.Version }}</p>
+        </div>
+        {{ end }}
+    </div>
+    <p>Welcome to the home page!</p>
+    </div>
+</body>
+
+</html>
+{{ end }}

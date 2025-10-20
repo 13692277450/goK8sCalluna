@@ -1,0 +1,96 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 三列等宽 */
+    gap: 10px;
+    /* 子元素间距 */
+}
+
+.item {
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+}
+
+.pod-card {
+    font-size: 12px;
+    color: #343bcd;
+    border: 1px solid #74cea3;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 350px;
+    box-shadow: 2px 2px 5px rgba(45, 26, 26, 0.1);
+}
+
+.pod-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-btn:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 15px;
+    text-align: center;
+}
