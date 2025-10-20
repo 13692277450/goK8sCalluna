@@ -52,14 +52,13 @@ const columns=[
             },
             {
               title: "Node Name",
-              dataIndex: "name",
-              key: "Status",
+              dataIndex: "NodeName",
+              key: "NodeName",
             },
             {
-              //   img:<img src={"img"}/>,
               title: "Name Space",
-              dataIndex: "NameSpace",
-              key: "NameSpace",
+              dataIndex: "Namespace",
+              key: "Namespace",
               
             },
             {
