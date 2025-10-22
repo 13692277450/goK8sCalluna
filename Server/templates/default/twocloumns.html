@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src='jquery.js' type='text/javascript'></script>
+
+    <title>左右联动布局</title>
+    <style>
+      /* 设置容器和左右列的样式 */
+      .container {
+        display: flex;
+        height: 100vh;
+      }
+
+      .left-column{
+        flex-basis: 10%; /* 初始宽度为容器的30% */
+        overflow: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+        transition: flex-basis 0.2s; /* 平滑过渡效果 */
+      }
+
+      .right-column {
+        flex-grow: 1;
+        overflow: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+        /* transition: width 0.2s; */
+      }
+
+      /* 设置中分线的样式 */
+      .splitter {
+        width: 10px;
+        cursor: col-resize;
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-column">
+        <!-- 左侧内容 -->
+        <h2>左侧列</h2>
+        <p>这是左侧列的内容。</p>
+      </div>
+      <div class="splitter" id="splitter"></div>
+      <div class="right-column">
+        <!-- 右侧内容 -->
+        <h2>右侧列</h2>
+        <p>这是右侧列的内容。</p>
+        <link rel="import" href="k8spodlist.html" id="cHeader" />
+
+      </div>
+    </div>
+
+    <script>
+      const splitter = document.getElementById("splitter");
+      const leftColumn = document.querySelector(".left-column");
+      const rightColumn = document.querySelector(".right-column");
+      const container = document.querySelector(".container");
+
+      let isResizing = false;
+      let initialX = 0;
+      let initialLeftWidth = 0;
+
+      splitter.addEventListener("mousedown", (e) => {
+        isResizing = true;
+        initialX = e.clientX;
+        initialLeftWidth = leftColumn.offsetWidth;
+
+        document.addEventListener("mousemove", resize);
+        document.addEventListener("mouseup", stopResize);
+
+        e.preventDefault();
+      });
+
+      function resize(e) {
+        if (!isResizing) return;
+
+        const containerRect = container.getBoundingClientRect();
+        const offsetX = e.clientX - initialX;
+        const newLeftWidth = initialLeftWidth + offsetX;
+        const newRightWidth = containerRect.width - newLeftWidth;
+
+        leftColumn.style.width = newLeftWidth + "px";
+        rightColumn.style.width = newRightWidth + "px";
+      }
+
+      function stopResize() {
+        isResizing = false;
+
+        document.removeEventListener("mousemove", resize);
+        document.removeEventListener("mouseup", stopResize);
+      }
+    </script>
+  </body>
+</html>
+

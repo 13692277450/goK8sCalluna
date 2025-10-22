@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/ming.css">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            background-color: aquamarine;
+            /* width: 80%;
+            height: 8vmin;
+            margin: 10vmin auto; */
+            /* display: table; */
+            display: flex;
+        }
+
+        li {
+            /* display: table-cell; */
+            /* line-height: 8vmin; */
+            text-align: center;
+            display: inline-block;
+            /* width: 20%; */
+        }
+
+        li:hover {
+            background-color: orangered;
+        }
+
+        .color {
+            background-color: red;
+        }
+        .item{
+            /* font-family: "华文新魏"; */
+            /* font-size: 4em; */
+            /* font-family: "华文行楷" */
+        }
+        .small{
+            /* font-family: "华文行楷"; */
+            /* font-size: 4em; */
+        }
+        .main div{
+            width: 80%;
+            height: 100px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li class="color">K8S-Calluna Management Center</li>
+        <li>PODS INFO</li>
+        <li>RESOURCES INFO</li>
+        <li>CONTAINER INFO</li>
+        <li>SERVER INFO</li>
+    </ul>
+    <div class="main">
+        <div class="item" style="display: block;">
+               <div class="pod-cards">
+        {{ range $pod := .Podlist }}
+        <div class="pod-card">
+            <h3 style="color: blueviolet;">{{ $pod.Name }}</h3>
+            <p><strong>Namespace:</strong> {{ $pod.Namespace }}</p>
+            <p><strong>Status:</strong> {{ $pod.Status }}</p>
+            <p><strong>Node:</strong> {{ $pod.NodeName }}</p>
+            <p><strong>Pod IP:</strong> Pod {{ $pod.PodIP }},
+            <p><strong>Host IP:</strong> Pod {{ $pod.HostIP }},
+            <p><strong>Start Time:</strong> {{ $pod.StartTime }}</p>
+        </div>
+        {{ end }}
+    </div>
+        </div>
+        <div class="item" >
+            <div class="pod-cards">
+        {{ range $resources := .ResourcesList }}
+        <div class="pod-card">
+            <p style="color: blueviolet; font-size:large;"><strong>Resouces Name: </strong>{{ $resources.Name }}</p>
+            <p><strong>Resources Kind:</strong>{{$resources.Kind}}</p>
+            <p><strong>Resources SingularName:</strong>{{$resources.SingularName}}</p>
+            <p><strong>Resources StorageVersionHash:</strong>{{$resources.StorageVersionHash}}</p>
+            <p><strong>Resources Version:</strong>{{$resources.ResourcesVersion}}</p>
+            <p><strong>Resources ShortNames:</strong>{{$resources.ShortNames}}</p>
+            <p><strong>Resources Categories:</strong>{{$resources.Categories}}</p>
+            <p><strong>Resources DeepCopyGroup:</strong>{{$resources.DeepCopyGroup}}</p>
+            <p><strong>Resources DeepCopyName:</strong>{{$resources.DeepCopyName}}</p>
+            <p><strong>Resources Verbs:</strong>{{$resources.Verbs}}</p>
+            <p><strong>Resources Namespaced:</strong>{{$resources.Namespaced}}</p>
+            <p><strong>Resources ResouceSize:</strong>{{$resources.ResouceSize}}</p>
+            <p><strong>Group Name:</strong> {{ $resources.Group }}</p>
+            <p><strong>Group Version:</strong> {{ $resources.Version }}</p>
+        </div>
+        {{ end }}
+    </div>
+        </div>
+        <div class="item" style="display: none;">
+            远赴人间惊鸿宴，一睹人间盛世颜
+        </div>
+        <div class="item" style="display: none;">
+            少年曾许凌云志，取得人间第一流
+        </div>
+        <div class="item" style="display: none;">
+            别人笑我太疯颠，我笑他人看不穿
+        </div>
+        <!-- <div class="small">
+            青天有月来几时，我今停杯一问之
+        </div> -->
+    </div>
+    <script>
+        var lis = document.querySelectorAll('li')
+        var items = document.querySelectorAll('.item')
+        for (i = 0; i < lis.length; i++) {
+            lis[i].setAttribute('index', i)
+            lis[i].onclick = function () {
+                for (var i = 0; i < lis.length; i++) {
+                    lis[i].className = ''
+                }
+                this.className = 'color'
+                var index = this.getAttribute('index')
+                for (var i = 0; i < items.length; i++) {
+                    items[i].style.display = 'none'
+                }
+                items[index].style.display = 'block'
+            }
+        }
+    </script>
+</body>
+
+</html>
