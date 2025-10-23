@@ -11,10 +11,25 @@ import {
   MailOutlined,
   ProfileOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu, theme, Dropdown, Space, message, Breadcrumb } from "antd";
+import {
+  Button,
+  Layout,
+  Menu,
+  theme,
+  Dropdown,
+  Space,
+  message,
+  Breadcrumb,
+  Tooltip,
+} from "antd";
 import logo from "../assets/logo.jpg";
 import reactLog from "../assets/react.svg";
 import { useNavigate, useLocation } from "react-router-dom";
+const withTooltip = (text, placement = 'right') => (
+  <Tooltip title={text} placement={placement}>
+    {text}
+  </Tooltip>
+);
 const { Header, Sider, Content } = Layout;
 const items = [
   { key: "userCenter", label: <a>K8S SYSTEM CENTER</a> },
@@ -24,60 +39,62 @@ const items = [
   },
 ];
 const itesMenuData = [
-            {
-              key: "system_menu",
-              label: "SYSTEM MANAGE",
-              children: [
-                {
-                  key: "/admin/system_menu/employee_type",
-                  label: "SYSTEM STATUS",
-                },
-                {
-                  key: "/admin/system_menu/employee_list",
-                  label: "K8S STATUS",
-                },
-              ],
-            },
-            {
-              key: "/admin/podslist_menu",
-              label: "PODS MANAGE",
-              children: [
-                {
-                  key: "/admin/podslist_menu/podslit_type",
-                  label: "PODS LIST",
-
-                },
-                {
-                  key: "/admin/podslist_menu/resourcesInfo",
-                  label: "RESOURCES DETAILS",
-                },
-              ],
-            },
-            {
-              key: "/admin/course_menu",
-              label: "RESOURCE MANAGE",
-
-
-            },
+  {
+    key: "system_menu",
+    label: "SYSTEM MANAGE",
+    children: [
+      {
+        key: "/admin/system_menu/employee_type",
+        label: "SYSTEM STATUS",
+      },
+      {
+        key: "/admin/system_menu/employee_list",
+        label: "K8S STATUS",
+      },
+    ],
+  },
+  {
+    key: "/admin/podslist_menu",
+    label: "PODS MANAGE",
+    children: [
+      {
+        key: "/admin/podslist_menu/podslit_type",
+        label: "PODS LIST",
+      },
+      {
+        key: "/admin/podslist_menu/resourcesInfo",
+        label: "RESOURCES DETAILS",
+      },
+    ],
+  },
+  {
+    key: "/admin/course_menu",
+    label: "RESOURCE MANAGE",
+  },
 ];
 
-const createNavFn =(key)=>{
-  let arrObj =[]
-  const demoFn =(arr) =>{
-    arr.forEach(n =>{
-      const {children, ...info} = n
-      arrObj.push(info)
-      if(children){
-        demoFn(children)
+const createNavFn = (key) => {
+  let arrObj = [];
+  const demoFn = (arr) => {
+    arr.forEach((n) => {
+      const { children, ...info } = n;
+      arrObj.push(info);
+      if (children) {
+        demoFn(children);
       }
-    })
+    });
+  };
+  demoFn(itesMenuData);
+  const temp = arrObj.filter((m) => key.includes(m.key));
+  if (temp.length > 0) {
+    return [
+      { label: "HOME", key: "/admin/system_menu/system_status" },
+      ...temp,
+    ];
+  } else {
   }
-  demoFn(itesMenuData)
-  const temp = arrObj.filter(m=>key.includes(m.key))
-  if (temp.length > 0){
-    return [{label:'HOME',key:'/admin/system_menu/system_status'},...temp]
-  } else{} return [];
-}
+  return [];
+};
 
 const searchUrlKey = (key) => {
   let arrObj = [];
@@ -111,11 +128,11 @@ const Mylayout = ({ children }) => {
   };
   const { pathname } = useLocation();
   let demoItemsArr = searchUrlKey(pathname);
-const [navurl,setNavurl] = useState([]);
+  const [navurl, setNavurl] = useState([]);
 
-  useEffect(()=>{
-    setNavurl(createNavFn(pathname))
-  },[pathname]);
+  useEffect(() => {
+    setNavurl(createNavFn(pathname));
+  }, [pathname]);
   return (
     <Layout className="ant-layout" style={{ minHeight: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -134,65 +151,79 @@ const [navurl,setNavurl] = useState([]);
             {
               key: "system_menu",
               icon: <MailOutlined style={{ color: "green" }} />,
-              label: "SYSTEM MANAGE",
-              children: [
+              label: withTooltip("SYSTEM MANAGE"),              children: [
                 {
                   icon: <PicLeftOutlined style={{ color: "orange" }} />,
                   key: "/admin/system_status",
-                  label: "SYSTEM STATUS",
-
+                  label: withTooltip("SYSTEM STATUS"),
                 },
                 {
                   icon: <PicLeftOutlined style={{ color: "red" }} />,
-                  key: "/admin/k8s_status",
-                  label: "K8S STATUS",
+                  key: "/admin/clusterinfo",
+                  label: withTooltip("CLUSTER INFO"),
                 },
               ],
             },
             {
               key: "/admin/podslist_menu",
-              icon: <ReadOutlined style={{color: "lightgreen"}}/>,
-              label: "PODS MANAGE",
+              icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+              label: withTooltip("PODS MANAGE"),
               children: [
                 {
                   key: "/admin/podsInfo",
-                  icon: <ReadOutlined style={{color: "lightgreen"}}/>,
-                  label: "PODS INFO",
+                  icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+                  label: withTooltip("PODS INFO"),
                 },
                 {
                   key: "/admin/resourcesInfo",
-                  icon: <ReadOutlined style={{color: "lightgreen"}}/>,
-                  label: "RESOURCES INFO",
+                  icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+                  label: withTooltip("RESOURCES INFO"),
                 },
               ],
             },
             {
               key: "/admin/logs_menu",
-              icon: <ProfileOutlined style={{color: "cyan"}}/>,
-              label: "LOGS MANAGE",
+              icon: <ProfileOutlined style={{ color: "cyan" }} />,
+              label: withTooltip("LOGS MANAGE"),
               children: [
                 {
                   key: "/admin/podsLogs",
-                  icon: <ProfileOutlined style={{color: "cyan"}}/>,
-                  label: "LOGS INFO",
+                  icon: <ProfileOutlined style={{ color: "cyan" }} />,
+                  label: withTooltip("PODS LOGS"),
                 },
                 {
                   key: "/admin/resourcesLogs",
-                  icon: <ProfileOutlined style={{color: "cyan"}}/>,
-                  label: "RESOURCES LOGS",
+                  icon: <ProfileOutlined style={{ color: "cyan" }} />,
+                  label: withTooltip("RESOURCES LOGS"),
                 },
               ],
             },
-              {
-              key: "/admin/SynscClock",
-              icon: <UserOutlined />,
-              label: "CONTAINER MANAGE",
-
+            {
+              key: "/admin/namespace",
+              icon: <ProfileOutlined style={{ color: "cyan" }} />,
+              label: withTooltip("NAMESPACE MANAGE"),
+              children: [
+                {
+                  key: "/admin/namespaceInfo",
+                  icon: <ProfileOutlined style={{ color: "cyan" }} />,
+                  label: withTooltip("NAMESPACE INFO"),
+                },
+                {
+                  key: "/admin/adddeletenamespace",
+                  icon: <ProfileOutlined style={{ color: "cyan" }} />,
+                  label: withTooltip("ADD DLETE NAMESPACE"),
+                },
+              ],
             },
             {
-              key: "/admin/course_menu",
+              key: "/admin/workloading",
+              icon: <UserOutlined />,
+              label: withTooltip("WORKLOADING MANAGE"),
+            },
+            {
+              key: "/admin/storage",
               icon: <UploadOutlined />,
-              label: "RESOURCE MANAGE",
+              label: withTooltip("STORAGE MANAGE"),
             },
           ]}
         />
@@ -236,11 +267,9 @@ const [navurl,setNavurl] = useState([]);
           }}
         >
           <Breadcrumb>
-          {
-            navurl.map(n=>{
-              return <Breadcrumb.Item key={n.key}>{n.label}</Breadcrumb.Item>
-            })
-          }
+            {navurl.map((n) => {
+              return <Breadcrumb.Item key={n.key}>{n.label}</Breadcrumb.Item>;
+            })}
           </Breadcrumb>
           {children}
         </Content>

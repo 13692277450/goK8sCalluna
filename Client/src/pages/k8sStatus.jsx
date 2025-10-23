@@ -1,11 +1,11 @@
 import React from "react";
 
 
-function K8sStatus() {
+function ClusterInfo() {
     return (
         <div>K8sStatus developing in pogress...</div>
     );
     
 }
 
-export default K8sStatus;
+export default ClusterInfo;

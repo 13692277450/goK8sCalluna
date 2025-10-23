@@ -89,6 +89,7 @@ const columns=[
   return (
       <div>
       <Card
+        style={{borderColor: '#ac48ebff'}}
         title="Pods Details"
         extra={
           <div>

@@ -5,7 +5,7 @@ import "dayjs/locale/zh-cn";
 import Mylayout from "./components/Mylayout";
 import { Routes, Route, Router } from "react-router-dom";
 import SystemStatus from "./pages/systemStatus";
-import K8sStatus from "./pages/k8sStatus";
+import ClusterInfo from "./pages/k8sStatus";
 import CourseManagment from "./pages/courseMenu";
 import ResourcesInfo from "./pages/resourcesInfo";
 import PodsInfo from "./pages/podsInfo";
@@ -24,7 +24,7 @@ function App() {
       <Mylayout>
         <Routes>
           <Route path="system_status" element={<SystemStatus />} />
-          <Route path="k8s_status" element={<K8sStatus />} />
+          <Route path="clusterinfo" element={<ClusterInfo />} />
           <Route path="podsInfo" element={<PodsInfo />} />
           <Route path="resourcesInfo" element={<ResourcesInfo />} />
           <Route path="podsLogs" element={<PodsLogs />} />
