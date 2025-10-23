@@ -7,6 +7,9 @@ import {
   ReadOutlined,
   PicLeftOutlined,
   DownOutlined,
+  BulbFilled,
+  MailOutlined,
+  ProfileOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme, Dropdown, Space, message, Breadcrumb } from "antd";
 import logo from "../assets/logo.jpg";
@@ -45,8 +48,8 @@ const itesMenuData = [
 
                 },
                 {
-                  key: "/admin/podslist_menu/podslist_list",
-                  label: "PODS DETAILS",
+                  key: "/admin/podslist_menu/resourcesInfo",
+                  label: "RESOURCES DETAILS",
                 },
               ],
             },
@@ -130,7 +133,7 @@ const [navurl,setNavurl] = useState([]);
           items={[
             {
               key: "system_menu",
-              icon: <UserOutlined style={{ color: "green" }} />,
+              icon: <MailOutlined style={{ color: "green" }} />,
               label: "SYSTEM MANAGE",
               children: [
                 {
@@ -148,16 +151,35 @@ const [navurl,setNavurl] = useState([]);
             },
             {
               key: "/admin/podslist_menu",
-              icon: <ReadOutlined />,
+              icon: <ReadOutlined style={{color: "lightgreen"}}/>,
               label: "PODS MANAGE",
               children: [
                 {
                   key: "/admin/podsInfo",
+                  icon: <ReadOutlined style={{color: "lightgreen"}}/>,
                   label: "PODS INFO",
                 },
                 {
-                  key: "/admin/podslist_list",
-                  label: "PODS DETAILS",
+                  key: "/admin/resourcesInfo",
+                  icon: <ReadOutlined style={{color: "lightgreen"}}/>,
+                  label: "RESOURCES INFO",
+                },
+              ],
+            },
+            {
+              key: "/admin/logs_menu",
+              icon: <ProfileOutlined style={{color: "cyan"}}/>,
+              label: "LOGS MANAGE",
+              children: [
+                {
+                  key: "/admin/podsLogs",
+                  icon: <ProfileOutlined style={{color: "cyan"}}/>,
+                  label: "LOGS INFO",
+                },
+                {
+                  key: "/admin/resourcesLogs",
+                  icon: <ProfileOutlined style={{color: "cyan"}}/>,
+                  label: "RESOURCES LOGS",
                 },
               ],
             },

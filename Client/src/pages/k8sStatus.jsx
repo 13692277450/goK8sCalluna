@@ -3,7 +3,7 @@ import React from "react";
 
 function K8sStatus() {
     return (
-        <div>K8sStatus</div>
+        <div>K8sStatus developing in pogress...</div>
     );
     
 }

@@ -7,7 +7,33 @@ import { get } from "../utils/request";
 import "./pagesCSS.css";
 import { useFetch } from "../utils/useFetch";
 
-function SystemStatus() {
+function SystemStatus(){
+  return(
+    <>
+    {/* <div>
+      {loading ? (
+              <div>Loading pod data...</div>
+            ) : error ? (
+              <div>Error loading pod data: {error.message}</div>
+            ) : (
+              <Table
+                columns={columns}
+                dataSource={tableData}
+                pagination={paginationProps}
+                rowKey={record => record.key}
+              />
+            )}
+            </div>
+    */}
+    <div> 
+      SystemStatus function design in progress....
+    </div>
+    </>
+  )
+}
+export default SystemStatus
+
+function SystemStatus1() {
   const [isShow, setIsShow] = useState(false);
   const [myForm] = Form.useForm();
   const [tableData, setTableData] = useState();
@@ -162,4 +188,4 @@ const columns=[
   );
 }
 
-export default SystemStatus;
+//export default SystemStatus1;

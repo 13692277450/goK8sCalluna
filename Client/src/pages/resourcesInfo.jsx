@@ -8,11 +8,10 @@ import "./pagesCSS.css";
 import { useFetch } from "../utils/useFetch";
 
 
-
-function PodsInfo() {
+function ResourcesInfo() {
   const [isShow, setIsShow] = useState(false);
   const [myForm] = Form.useForm();
-  const { data: tableData, loading, error } = useFetch("http://localhost:8080/k8spodlist.html");
+  const { data: tableData, loading, error } = useFetch("http://localhost:8080/resourcesInfo.html");
   const [current, setCurrent] = useState(1);
   // 默认一页展示10条数据
   const [pageSize, setPageSize] = useState(10);
@@ -52,35 +51,55 @@ const columns=[
               key: "Name",
             },
             {
-              title: "Node Name",
-              dataIndex: "NodeName",
-              key: "NodeName",
+              title: "Kind",
+              dataIndex: "Kind",
+              key: "Kind",
             },
             {
-              title: "Name Space",
-              dataIndex: "Namespace",
-              key: "Namespace",
+              title: "SingularName",
+              dataIndex: "SingularName",
+              key: "SingularName",
               
             },
             {
-              title: "Status",
-              dataIndex: "Status",
-              key: "Status",
+              title: "DeepCopyGroup",
+              dataIndex: "DeepCopyGroup",
+              key: "DeepCopyGroup",
             },
             {
-              title: "Host IP",
-              dataIndex: "HostIP",
-              key: "HostIP",
+              title: "DeepCopyName",
+              dataIndex: "DeepCopyName",
+              key: "DeepCopyName",
             },
             {
-              title: "Pod IP",
-              dataIndex: "PodIP",
-              key: "PodIP",
+              title: "Verbs",
+              dataIndex: "Verbs",
+              key: "Verbs",
             },
             {
-              title: "Start Time",
-              dataIndex: "StartTime",
-              key: "StartTime",
+              title: "Namespaced",
+              dataIndex: "Namespaced",
+              key: "Namespaced",
+            },
+            {
+              title: "Group",
+              dataIndex: "Group",
+              key: "Group",
+            },
+              {
+              title: "Version",
+              dataIndex: "Version",
+              key: "Version",
+            },
+               {
+              title: "ShortNames",
+              dataIndex: "ShortNames",
+              key: "ShortNames",
+            },
+             {
+              title: "StorageVersionHash",
+              dataIndex: "StorageVersionHash",
+              key: "StorageVersionHash",
             },
           ]
 
@@ -89,7 +108,7 @@ const columns=[
   return (
       <div>
       <Card
-        title="Pods Details"
+        title="Resources Details"
         extra={
           <div>
             <Button
@@ -105,17 +124,16 @@ const columns=[
         }
       >
         <Form form={myForm} style={{overflow: 'auto'}}>
-          <Form.Item label="Pod Name:">
-            <Input placeholder="Pls input pod name:" />
+          <Form.Item label="Resources Name:">
+            <Input placeholder="Pls input resource name:" />
           </Form.Item>
         </Form>
         {loading ? (
-          <div>Loading pod data...</div>
+          <div>Loading resources data...</div>
         ) : error ? (
-          <div>Error loading pod data: {error.message}</div>
+          <div>Error loading resources data: {error.message}</div>
         ) : (
-         
-          <Table
+          <Table style={{overflow: 'auto'}}
             columns={columns}
             dataSource={tableData}
             pagination={paginationProps}
@@ -124,7 +142,7 @@ const columns=[
         )}
 </Card>
       <Modal
-        title="新增员工成绩"
+        title="ADD"
         onCancel={() => {
           setIsShow(false);
         }}
@@ -139,30 +157,30 @@ const columns=[
           form={myForm}
           labelCol={{ span: 3 }}
           onFinish={() => {
-            message.success("新增成功");
+            message.success("Add sucess");
 
             setIsShow(false);
           }}
         >
           <Form.Item
-            label="Name: "
+            label="Name:"
             name="name"
             rules={[
               {
                 required: true,
-                message: "Pls input name: ",
+                message: "Pls input name:",
               },
               {
-                max: 10,
-                message: "Maximum characters limited to 10",
+                max: 20,
+                message: "Maximum characters is limite to 20",
                 whitespace: true,
               },
             ]}
           >
-            <Input placeholder="Pls input name: " />
+            <Input placeholder="Pls input name:" />
           </Form.Item>
-          <Form.Item label="SingularName" name="desc">
-            <Input placeholder="Pls input singularName: " />
+          <Form.Item label="name:" name="desc">
+            <Input placeholder="pls input  singularName:" />
           </Form.Item>
           <Form.Item label="Kind">
             <MyUpload />
@@ -173,4 +191,4 @@ const columns=[
   );
 }
 
-export default PodsInfo;
+export default ResourcesInfo;

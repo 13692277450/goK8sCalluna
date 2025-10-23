@@ -23,7 +23,7 @@ function LogOut() {
       >
         <img src={reactLog} style={{ margin: 20 }}></img>
         <Card
-          title="员工管理系统"
+          title="K8S MANAGE SYSTEM CENTER LOGIN"
 
           style={{ margin: 20, 
             backgroundColor: "lightblue" ,
