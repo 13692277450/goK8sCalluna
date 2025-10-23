@@ -1,7 +1,6 @@
 package kubernetsServ
 
 import (
-	"fmt"
 	"gok8s/models"
 	"strconv"
 	"strings"
@@ -15,7 +14,7 @@ import (
 // var ClientsetResouces *kubernetes.Clientset
 var ConfigR *rest.Config
 
-func GetK8sResources() {
+func GetK8sResources() []models.ResourcesInfo {
 	//Kubeconfig := flag.String("kubeconfig", "kubeconfig", "")
 	// ConfigResources, err := clientcmd.BuildConfigFromFlags("", *Kubeconfig)
 	// if err != nil {
@@ -31,19 +30,18 @@ func GetK8sResources() {
 	//fmt.Println("Configure$$$$$$$$$$$$$$$$$$$4: ", ConfigR)
 	discoveryClient, err := discovery.NewDiscoveryClientForConfig(ConfigR)
 	if err != nil {
-		fmt.Println("Discovery err: ", err)
-		return
+
 	}
 	_, APIResourceList, err := discoveryClient.ServerGroupsAndResources()
 	if err != nil {
-		return
+
 	}
 	var resourcesInfos []models.ResourcesInfo
 
 	for _, list := range APIResourceList {
 		GV, err := schema.ParseGroupVersion(list.GroupVersion)
 		if err != nil {
-			return
+			break
 		}
 		for _, Resource := range list.APIResources {
 			//fmt.Printf("nameXXXXXXXXXX: %v, group: %v, version: %v", resource.Name, gv.Group, gv.Version)
@@ -84,4 +82,5 @@ func GetK8sResources() {
 		}
 		models.SetResources(resourcesInfos)
 	}
+	return resourcesInfos
 }

@@ -28,7 +28,7 @@ func (con AdminController) Home(c *gin.Context) {
 	pvcs := models.GetPVC()
 	resources := models.GetResources()
 
-	fmt.Println("Resources: &&&&&&&&&&&&&&", resources)
+	// fmt.Println("Resources: &&&&&&&&&&&&&&", resources)
 	//strpvc := fmt.Sprintf("%v", pvcs)
 	//var strpvc = "test only"
 	c.HTML(200, "/index.html", gin.H{

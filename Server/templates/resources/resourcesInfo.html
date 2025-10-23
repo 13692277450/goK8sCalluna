@@ -1,0 +1,42 @@
+{{ define "resourcesInfo.html" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/ming.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <div >
+ 
+     <h1>Resources List</h1>
+        <br></br>
+    <div class="pod-cards">
+        {{ range $resources := .ResourcesList }}
+        <div class="pod-card">
+            <p style="color: blueviolet; font-size:large;"><strong>Resouces Name: </strong>{{ $resources.Name }}</p>
+            <p><strong>Resources Kind:</strong>{{$resources.Kind}}</p>
+            <p><strong>Resources SingularName:</strong>{{$resources.SingularName}}</p>
+            <p><strong>Resources StorageVersionHash:</strong>{{$resources.StorageVersionHash}}</p>
+            <p><strong>Resources Version:</strong>{{$resources.ResourcesVersion}}</p>
+            <p><strong>Resources ShortNames:</strong>{{$resources.ShortNames}}</p>
+            <p><strong>Resources Categories:</strong>{{$resources.Categories}}</p>
+            <p><strong>Resources DeepCopyGroup:</strong>{{$resources.DeepCopyGroup}}</p>
+            <p><strong>Resources DeepCopyName:</strong>{{$resources.DeepCopyName}}</p>
+            <p><strong>Resources Verbs:</strong>{{$resources.Verbs}}</p>
+            <p><strong>Resources Namespaced:</strong>{{$resources.Namespaced}}</p>
+            <p><strong>Resources ResouceSize:</strong>{{$resources.ResouceSize}}</p>
+            <p><strong>Group Name:</strong> {{ $resources.Group }}</p>
+            <p><strong>Group Version:</strong> {{ $resources.Version }}</p>
+        </div>
+        {{ end }}
+    </div>
+    <p>Welcome to the resources page!</p>
+    </div>
+</body>
+
+</html>
+{{ end }}

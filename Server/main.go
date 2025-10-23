@@ -61,12 +61,14 @@ func main() {
 
 	r.Static("/static", "./static")
 
-	r.StaticFS("/website", http.Dir("D:/Project/GoOfficial/GoK8s/website"))
+	r.StaticFS("/website", http.Dir("./website"))
 
 	routers.AdminRoutersInit(r)
 	routers.ApiRoutersInit(r)
 	routers.LoginRoutersInit(r)
 	routers.K8sManageCenterInit(r)
+	routers.K8sResourcesInit(r)
+	routers.PodsLogRouterInit(r)
 	//routers.PVCControllerInit(r)
 	// 初始化控制器
 	loginController := loginControllers.LoginController{}

@@ -33,21 +33,21 @@ func Deployment() {
 	}
 	deployment := &appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{
-			Name: "example-deployment55",
+			Name: "example-deployment77",
 		},
 		Spec: appsv1.DeploymentSpec{
 			Replicas: int32Ptr(3),
 			Selector: &metav1.LabelSelector{
-				MatchLabels: map[string]string{"app": "example-app"},
+				MatchLabels: map[string]string{"app": "example-app11"},
 			},
 			Template: corev1.PodTemplateSpec{
 				ObjectMeta: metav1.ObjectMeta{
-					Labels: map[string]string{"app": "example-app"},
+					Labels: map[string]string{"app": "example-app11"},
 				},
 				Spec: corev1.PodSpec{
 					Containers: []corev1.Container{
 						{
-							Name:  "example-container",
+							Name:  "example-container11",
 							Image: "nginx:latest",
 						},
 					},
