@@ -41,7 +41,7 @@ func GetLogsFromMultiPods(nameSpace, LabelSelector string) string {
 		//podsLogsResult = append(podsLogsResult, podLogs)
 		// 将pod.Name作为标题，podLogs作为内容
 		totalPodsLogs += "TITLE:" + pod.Name + "\nCONTENT:" + podLogs + "\n"
-		fmt.Println(totalPodsLogs)
+		//fmt.Println(totalPodsLogs)
 	}
 	return totalPodsLogs
 }

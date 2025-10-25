@@ -1,69 +1,71 @@
 import React, { useState } from 'react';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Flex, message, Upload } from 'antd';
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-};
-const beforeUpload = file => {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-  if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!');
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
-  }
-  return isJpgOrPng && isLt2M;
-};
-const MyUpload = () => {
+import { BulbFilled, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Upload } from 'antd';
+
+const MyUpload = ({ onFileContentChange }) => {
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
-  const handleChange = info => {
-    if (info.file.status === 'uploading') {
-      setLoading(true);
-      return;
+
+  const beforeUpload = file => {
+    const isYaml = file.type === 'application/x-yaml' || file.name.endsWith('.yaml') || file.name.endsWith('.yml');
+    if (!isYaml) {
+      message.error('You can only upload YAML file!');
+      return false;
     }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, url => {
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('YAML must smaller than 2MB!');
+      return false;
+    }
+    return true;
+  };
+
+  const handleChange = info => {
+    if (info.file.originFileObj) {
+      setLoading(true);
+      const reader = new FileReader();
+      reader.onload = (e) => {
         setLoading(false);
-        setImageUrl(url);
-      });
+        onFileContentChange(e.target.result);
+      };
+      reader.onerror = () => {
+        setLoading(false);
+        message.error('File reading failed');
+      };
+      reader.readAsText(info.file.originFileObj);
     }
   };
+
   const uploadButton = (
-    <button style={{ border: 0, background: 'none' }} type="button">
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </button>
+    <Button
+      icon={loading ? <LoadingOutlined /> : <PlusOutlined />}
+      style={{
+        display: 'flex',
+        backgroundColor: "yellowgreen",
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '32px', // 与Modal按钮高度一致
+        padding: '0 16px', // 与Modal按钮内边距一致
+      }}
+    >
+      Upload Yaml File
+    </Button>
   );
+
   return (
-    <Flex gap="middle" wrap>
-      <Upload
-        name="avatar"
-        listType="picture-card"
-        className="avatar-uploader"
-        showUploadList={false}
-        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-        beforeUpload={beforeUpload}
-        onChange={handleChange}
-      >
-        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-      </Upload>
-      <Upload
-        name="avatar"
-        listType="picture-circle"
-        className="avatar-uploader"
-        showUploadList={false}
-        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-        beforeUpload={beforeUpload}
-        onChange={handleChange}
-      >
-        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-      </Upload>
-    </Flex>
+    <Upload
+      name="yamlFile"
+      showUploadList={false}
+      beforeUpload={beforeUpload}
+      onChange={handleChange}
+      accept=".yaml,.yml"
+      customRequest={({ onSuccess }) => {
+        // 立即执行上传成功回调，因为我们直接处理文件
+        setTimeout(() => onSuccess("ok"), 0);
+      }}
+    >
+      {uploadButton}
+    </Upload>
   );
 }
+
 export default MyUpload;

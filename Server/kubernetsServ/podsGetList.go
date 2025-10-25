@@ -96,8 +96,8 @@ func GetK8sPods() []models.PodInfo {
 			Namespace: pod.Namespace,
 		}
 		PodInfos = append(PodInfos, podInfo)
-		fmt.Printf("名称：%s，状态：%s, NodeName: %s, HostIP: %s, PodIP: %s, StartTime: %s, NameSpace: %s \n",
-			pod.Name, pod.Status.Phase, pod.Spec.NodeName, pod.Status.HostIP, pod.Status.PodIP, pod.Status.StartTime, pod.Namespace)
+		// fmt.Printf("名称：%s，状态：%s, NodeName: %s, HostIP: %s, PodIP: %s, StartTime: %s, NameSpace: %s \n",
+		// 	pod.Name, pod.Status.Phase, pod.Spec.NodeName, pod.Status.HostIP, pod.Status.PodIP, pod.Status.StartTime, pod.Namespace)
 	}
 	models.SetPods(PodInfos)
 	return PodInfos

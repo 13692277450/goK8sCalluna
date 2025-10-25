@@ -8,10 +8,11 @@ import "./pagesCSS.css";
 import { useFetch } from "../utils/useFetch";
 
 
-function ResourcesInfo() {
+
+function NodesInfo() {
   const [isShow, setIsShow] = useState(false);
   const [myForm] = Form.useForm();
-  const { data: tableData, loading, error } = useFetch("http://localhost:8080/resourcesInfo.html");
+  const { data: tableData, loading, error } = useFetch("http://localhost:8080/systeminfo");
   const [current, setCurrent] = useState(1);
   // 默认一页展示10条数据
   const [pageSize, setPageSize] = useState(10);
@@ -47,71 +48,46 @@ const paginationChange = async (current, size) => {
 const columns=[
             {
               title: "Name",
-              dataIndex: "Name",
-              key: "Name",
+              dataIndex: "name",
+              key: "name",
             },
             {
-              title: "Kind",
-              dataIndex: "Kind",
-              key: "Kind",
+              title: "Phase",
+              dataIndex: "phase",
+              key: "phase",
             },
             {
-              title: "SingularName",
-              dataIndex: "SingularName",
-              key: "SingularName",
+              title: "OS Image",
+              dataIndex: "osimage",
+              key: "osimage",
               
             },
             {
-              title: "DeepCopyGroup",
-              dataIndex: "DeepCopyGroup",
-              key: "DeepCopyGroup",
+              title: "Kubelet Version",
+              dataIndex: "kubeletversion",
+              key: "kubeletversion",
             },
             {
-              title: "DeepCopyName",
-              dataIndex: "DeepCopyName",
-              key: "DeepCopyName",
+              title: "Operating System",
+              dataIndex: "operatingsystem",
+              key: "operatingsystem",
             },
             {
-              title: "Verbs",
-              dataIndex: "Verbs",
-              key: "Verbs",
+              title: "Architecture",
+              dataIndex: "architecture",
+              key: "architecture",
             },
             {
-              title: "Namespaced",
-              dataIndex: "Namespaced",
-              key: "Namespaced",
-            },
-            {
-              title: "Group",
-              dataIndex: "Group",
-              key: "Group",
-            },
-              {
-              title: "Version",
-              dataIndex: "Version",
-              key: "Version",
-            },
-               {
-              title: "ShortNames",
-              dataIndex: "ShortNames",
-              key: "ShortNames",
-            },
-             {
-              title: "StorageVersionHash",
-              dataIndex: "StorageVersionHash",
-              key: "StorageVersionHash",
+              title: "Addresses",
+              dataIndex: "addresses",
+              key: "addresses",
             },
           ]
-
-
-
   return (
       <div>
       <Card
-      style={{
-          borderColor: '#4fe68bff'
-      }}
-        title="Resources Details"
+        style={{borderColor: '#ac48ebff'}}
+        title="Nodes Details"
         extra={
           <div>
             <Button
@@ -127,16 +103,18 @@ const columns=[
         }
       >
         <Form form={myForm} style={{overflow: 'auto'}}>
-          <Form.Item label="Resources Name:">
-            <Input placeholder="Pls input resource name:" />
+          <Form.Item label="Node Name:">
+            <Input placeholder="Pls input node name:" />
           </Form.Item>
         </Form>
         {loading ? (
-          <div>Loading resources data...</div>
+          <div>Loading nodes data...</div>
         ) : error ? (
-          <div>Error loading resources data: {error.message}</div>
+          <div>Error loading nodes data: {error.message}</div>
         ) : (
-          <Table style={{overflow: 'auto'}}
+         
+          <Table
+            style={{marginTop: '20px'}}
             columns={columns}
             dataSource={tableData}
             pagination={paginationProps}
@@ -145,7 +123,7 @@ const columns=[
         )}
 </Card>
       <Modal
-        title="ADD"
+        title="Add Node"
         onCancel={() => {
           setIsShow(false);
         }}
@@ -160,29 +138,30 @@ const columns=[
           form={myForm}
           labelCol={{ span: 3 }}
           onFinish={() => {
-            message.success("Add sucess");
+            message.success("Add successfully!");
+
             setIsShow(false);
           }}
         >
           <Form.Item
-            label="Name:"
+            label="Name: "
             name="name"
             rules={[
               {
                 required: true,
-                message: "Pls input name:",
+                message: "Pls input name: ",
               },
               {
-                max: 20,
-                message: "Maximum characters is limite to 20",
+                max: 10,
+                message: "Maximum characters limited to 10",
                 whitespace: true,
               },
             ]}
           >
-            <Input placeholder="Pls input name:" />
+            <Input placeholder="Pls input name: " />
           </Form.Item>
-          <Form.Item label="name:" name="desc">
-            <Input placeholder="pls input  singularName:" />
+          <Form.Item label="SingularName" name="desc">
+            <Input placeholder="Pls input singularName: " />
           </Form.Item>
           <Form.Item label="Kind">
             <MyUpload />
@@ -193,4 +172,4 @@ const columns=[
   );
 }
 
-export default ResourcesInfo;
+export default NodesInfo;

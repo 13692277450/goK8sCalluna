@@ -56,7 +56,7 @@ const renderLogCards = (logs) => {
       const title1 = titlePart.trim();
       const content = contentParts.join('CONTENT:').trim();
       const lines = logText.split('\n'); // 分割为行数组
-      const title = "Pod Name:  "+ lines[0];
+      const title = "Pod Name:  "+ lines[0].replace("TITLE:","");
       
       if (title && content) {
         cards.push({title, content});
@@ -73,10 +73,13 @@ const renderLogCards = (logs) => {
           <Col span={12}>
             <Card 
               title={cards[i].title}
+              headStyle= { { backgroundColor: '#dbfaf8ff', color: '#5876edff' }}
               style={{ 
                 marginBottom: 16,
                 height: '500px',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                borderColor: '#4fe68bff'
+                
               }}
             >
               <div style={{
@@ -84,6 +87,7 @@ const renderLogCards = (logs) => {
                 overflow: 'auto',
                 padding: '8px',
                 boxSizing: 'border-box'
+
               }}>
                 <pre style={{
                   whiteSpace: 'pre-wrap',
@@ -99,10 +103,12 @@ const renderLogCards = (logs) => {
             <Col span={12}>
               <Card 
                 title={cards[i+1].title}
+                headStyle= { { backgroundColor: '#dbfaf8ff', color: '#5876edff' }}
                 style={{ 
                   marginBottom: 16,
                   height: '500px',
-                  overflow: 'hidden'
+                  overflow: 'hidden',
+                  borderColor: '#4fe68bff',
                 }}
               >
               <div style={{
@@ -132,7 +138,6 @@ const renderLogCards = (logs) => {
   }
 };
 
-// 使用示例
 const LogsDisplay = ({ logsData }) => {
   return (
     <div>
