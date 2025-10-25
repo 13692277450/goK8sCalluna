@@ -1,4 +1,9 @@
 
+2025.10.25 update: Add function to deploy Yaml to server auto create resources, pod... etc.
+
+<img width="2551" height="1531" alt="image" src="https://github.com/user-attachments/assets/803239f1-b03b-4675-9595-aba9c6746865" />
+
+=======================================================================================================================================
 Front and backend full stack design. server code can running on Server or client, because it use .kube\config file in Golang code with embed file block, but later I should conside kubeconfig was changed and how to get fresh config from server.
 
 K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Ubuntu, this project plan build an excellent K8s management tool in the next two year, pls kindly support me and join together! Thanks.
