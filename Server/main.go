@@ -14,11 +14,13 @@ HomePage: www.pavogroup.top
 package main
 
 import (
+	"fmt"
 	loginControllers "gok8s/controllers/login"
 	"gok8s/kubernetsServ"
 	"gok8s/models"
 	"gok8s/routers"
 	"net/http"
+	"strings"
 	"text/template"
 
 	"github.com/gin-gonic/gin"
@@ -34,8 +36,12 @@ func main() {
 	go loginControllers.InitDB()
 	//go config.InitDB()
 	kubernetsServ.K8sConnectionInit()
+	// 获取K8s Pods
 	kubernetsServ.GetK8sPods()
+
+	// 获取K8s资源
 	kubernetsServ.GetK8sResources()
+
 	// 初始化Kubernetes相关数据
 	kubernetsServ.GetPVCList()
 	//kubernetsServ.Deployment()
@@ -60,6 +66,9 @@ func main() {
 	r.LoadHTMLGlob("templates/**/*")
 	r.Static("/static", "./static")
 	r.StaticFS("/website", http.Dir("./website"))
+	// 先初始化基本路由
+	fmt.Println("Initializing YAML deployment routes...")
+	routers.DeployYamlInit(r)
 	routers.AdminRoutersInit(r)
 	routers.ApiRoutersInit(r)
 	routers.LoginRoutersInit(r)
@@ -68,10 +77,27 @@ func main() {
 	routers.PodsLogRouterInit(r)
 	routers.SystemControllerInit(r)
 	routers.NamespaceControllerInit(r)
-	//routers.PVCControllerInit(r)
+
+	// 添加日志确认路由已注册
+	routes := r.Routes()
+	for _, route := range routes {
+		fmt.Printf("Registered route: %s %s\n", route.Method, route.Path)
+		if strings.Contains(route.Path, "deploypod") {
+			fmt.Printf("FOUND DEPLOYPOD ROUTE: %s %s\n", route.Method, route.Path)
+		}
+	}
+
+	// 添加一个临时测试路由
+	r.GET("/test", func(c *gin.Context) {
+		c.String(200, "Test route is working!")
+	})
+
 	// 初始化控制器
 	loginController := loginControllers.LoginController{}
-	kubernetsServ.GetK8sResources()
+
+	// 获取K8s资源
+	//kubernetsServ.GetK8sResources()
+
 	// 路由配置 - 明确区分GET和POST
 	r.GET("/login", loginController.ShowLoginPage)
 	r.POST("/login", loginController.Login)

@@ -33,7 +33,7 @@ func Deployment() {
 	}
 	deployment := &appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{
-			Name: "example-deployment77",
+			Name: "example-name77",
 		},
 		Spec: appsv1.DeploymentSpec{
 			Replicas: int32Ptr(3),
@@ -42,7 +42,7 @@ func Deployment() {
 			},
 			Template: corev1.PodTemplateSpec{
 				ObjectMeta: metav1.ObjectMeta{
-					Labels: map[string]string{"app": "example-app11"},
+					Labels: map[string]string{"app": "example-Labels11"},
 				},
 				Spec: corev1.PodSpec{
 					Containers: []corev1.Container{
@@ -60,7 +60,7 @@ func Deployment() {
 		fmt.Println("Create deployment error: ", err)
 		log.Fatal(err)
 	}
-	fmt.Printf("Deployment %q 已创建\n", result.GetObjectMeta().GetName())
+	fmt.Printf("Deployment %q was created\n", result.GetObjectMeta().GetName())
 
 }
 func int32Ptr(i int32) *int32 { return &i }
