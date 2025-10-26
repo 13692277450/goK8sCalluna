@@ -12,7 +12,7 @@ import { useFetch } from "../utils/useFetch";
 function NamespaceInfo() {
   const [isShow, setIsShow] = useState(false);
   const [myForm] = Form.useForm();
-  const { data: tableData, loading, error } = useFetch("http://localhost:8080/namespaceinfo");
+  const { data: tableData, loading, error } = useFetch("namespaceinfo");
   const [current, setCurrent] = useState(1);
   // 默认一页展示10条数据
   const [pageSize, setPageSize] = useState(10);
@@ -66,7 +66,7 @@ const columns=[
   return (
       <div>
       <Card
-        style={{borderColor: '#ac48ebff',width:400, height:300, marginBottom: 20, marginRight: 20, overflow: 'auto',
+        style={{borderColor: '#ac48ebff',width:500, height:300, marginBottom: 20, marginRight: 20, overflow: 'auto',
 }}
         title="NameSpace Details"
         extra={
@@ -87,6 +87,8 @@ const columns=[
             dataSource={tableData}
             pagination={paginationProps}
             rowKey={record => record.key}
+            rowClassName={()=> 'custom-row-line-purple'}
+
           />
         )}
 </Card>

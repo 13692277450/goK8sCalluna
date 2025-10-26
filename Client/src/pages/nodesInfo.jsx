@@ -12,7 +12,7 @@ import { useFetch } from "../utils/useFetch";
 function NodesInfo() {
   const [isShow, setIsShow] = useState(false);
   const [myForm] = Form.useForm();
-  const { data: tableData, loading, error } = useFetch("http://localhost:8080/systeminfo");
+  const { data: tableData, loading, error } = useFetch("systeminfo");
   const [current, setCurrent] = useState(1);
   // 默认一页展示10条数据
   const [pageSize, setPageSize] = useState(10);
@@ -119,6 +119,7 @@ const columns=[
             dataSource={tableData}
             pagination={paginationProps}
             rowKey={record => record.key}
+            rowClassName={()=> 'custom-row-line-purple'}
           />
         )}
 </Card>

@@ -6,10 +6,7 @@ import axios from "axios";
 import "./pagesCSS.css";
 import { useFetch } from "../utils/useFetch";
 
-// 从useFetch导入API_BASIC_URL
-import { API_BASIC_URL } from "../utils/useFetch";
-
-function PodsInfo() {
+function PVCsInfo() {
   const { TextArea } = Input;
   const [yamlContent, setYamlContent] = useState("");
   const [isShow, setIsShow] = useState(false);
@@ -18,16 +15,17 @@ function PodsInfo() {
     data: tableData,
     loading,
     error,
-  } = useFetch("k8spodsinfo");
+  } = useFetch("pvcinfo");
   const [current, setCurrent] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+
   const [pageOption, setPageOption] = useState({
     pageNo: 1,
     pageSize: 10,
   });
 
   const dataSource = { tableData };
-  const paginationProps = { 
+  const paginationProps = {
     current: pageOption.pageNo,
     pageSize: pageOption.pageSize,
     total: dataSource.length,
@@ -41,14 +39,12 @@ function PodsInfo() {
     });
   };
 
-  //Deploy yaml - 使用API_BASIC_URL构建URL
+  //Deploy yaml
   const sendDataToBackend = async (yamlContent) => {
     try {
       console.log("Sending YAML content:", yamlContent);
-      // 使用API_BASIC_URL构建完整的URL
-      const url = `${API_BASIC_URL}/deploypod`;
       const response = await axios.post(
-        url,
+        "http://localhost:8080/api/deploypod",
         yamlContent,
         {
           headers: {
@@ -98,12 +94,7 @@ function PodsInfo() {
       key: "Name",
     },
     {
-      title: "Node Name",
-      dataIndex: "NodeName",
-      key: "NodeName",
-    },
-    {
-      title: "Name Space",
+      title: "NameSpace",
       dataIndex: "Namespace",
       key: "Namespace",
     },
@@ -113,27 +104,37 @@ function PodsInfo() {
       key: "Status",
     },
     {
-      title: "Host IP",
-      dataIndex: "HostIP",
-      key: "HostIP",
+      title: "StorageClass",
+      dataIndex: "StorageClass",
+      key: "StorageClass",
     },
     {
-      title: "Pod IP",
-      dataIndex: "PodIP",
-      key: "PodIP",
+      title: "Capacity",
+      dataIndex: "Capacity",
+      key: "Capacity",
     },
     {
-      title: "Start Time",
-      dataIndex: "StartTime",
-      key: "StartTime",
+      title: "AccessModes",
+      dataIndex: "AccessModes",
+      key: "PoAccessModesdIP",
+    },
+    {
+      title: "UID",
+      dataIndex: "UID",
+      key: "UID",
+    },
+     {
+      title: "CreationTime",
+      dataIndex: "CreationTime",
+      key: "CreationTime",
     },
   ];
 
   return (
     <div>
       <Card
-        style={{ borderColor: "#2d5cf5ff" }}
-        title="Pods Details"
+        style={{ borderColor: "#e3f080ff" }}
+        title="PVCs Information"
         extra={
           <div>
             <Button
@@ -149,8 +150,8 @@ function PodsInfo() {
         }
       >
         <Form form={myForm} style={{ overflow: "auto" }}>
-          <Form.Item label="Pod Name:">
-            <Input placeholder="Pls input pod name:" />
+          <Form.Item label="PVC Name:">
+            <Input placeholder="Pls input PVC name:" />
           </Form.Item>
         </Form>
           {loading ? (
@@ -163,7 +164,7 @@ function PodsInfo() {
             dataSource={tableData}
             pagination={paginationProps}
             rowKey={(record) => record.key}
-            rowClassName={() => 'custom-row-line-blue'} // 添加行样式类名
+            rowClassName={() => 'custom-row-line-yellow'} // 添加行样式类名
           />
         )}
       </Card>
@@ -218,4 +219,4 @@ function PodsInfo() {
   );
 }
 
-export default PodsInfo;
+export default PVCsInfo;

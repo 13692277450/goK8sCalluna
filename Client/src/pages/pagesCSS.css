@@ -47,3 +47,42 @@
   width: 40px;
   height: 40px;
 }
+
+/* 表格行样式 */
+/* 基础行样式 */
+.ant-table-tbody > tr.custom-row-line td {
+  border-bottom: 1px solid #90ee90 !important; /* 浅绿色行线 */
+}
+.ant-table-tbody > tr.custom-row-line-purple td {
+  border-bottom: 1px solid #bf9bfc !important; /* 浅绿色行线 */
+}
+/* 悬停效果 */
+.ant-table-tbody > tr.custom-row-line-purple:hover td {
+  background-color: #bf9bfc !important; /* 浅绿色背景悬停效果 */
+}
+.ant-table-tbody > tr.custom-row-line-green td {
+  border-bottom: 1px solid #b4f989 !important; /* 浅绿色行线 */
+}
+/* 悬停效果 */
+.ant-table-tbody > tr.custom-row-line-green:hover td {
+  background-color: #c7f8a8 !important; /* 浅绿色背景悬停效果 */
+}
+.ant-table-tbody > tr.custom-row-line-yellow td {
+  border-bottom: 1px solid #f3f355 !important; /* 浅绿色行线 */
+}
+/* 悬停效果 */
+.ant-table-tbody > tr.custom-row-line-yellow:hover td {
+  background-color: #f5f58b !important; /* 浅绿色背景悬停效果 */
+}
+.ant-table-tbody > tr.custom-row-line-blue td {
+  border-bottom: 1px solid #577ff8 !important; /* 浅绿色行线 */
+}
+/* 悬停效果 */
+.ant-table-tbody > tr.custom-row-line-blue:hover td {
+  background-color: #7285f3 !important; /* 浅绿色背景悬停效果 */
+}
+/* 确保行线在所有情况下都可见 */
+.ant-table-tbody > tr.custom-row-line {
+  border-bottom: none !important; /* 移除默认边框 */
+}
+

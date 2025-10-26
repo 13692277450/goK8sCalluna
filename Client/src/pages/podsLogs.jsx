@@ -6,7 +6,8 @@ function PodsLogs() {
     data: TableData,
     loading,
     error,
-  } = useFetch("http://localhost:8080/api/pods/logs");
+  } = useFetch('pods/logs')
+  // useFetch("http://localhost:8080/api/pods/logs");
   const dataSource = TableData;
   
   if (error) {
@@ -103,7 +104,7 @@ const renderLogCards = (logs) => {
             <Col span={12}>
               <Card 
                 title={cards[i+1].title}
-                headStyle= { { backgroundColor: '#dbfaf8ff', color: '#5876edff' }}
+                headStyle= { { backgroundColor: '#dbfaf8ff', color: '#4266f5ff' }}
                 style={{ 
                   marginBottom: 16,
                   height: '500px',

@@ -8,13 +8,15 @@ import "./pagesCSS.css";
 import { useFetch } from "../utils/useFetch";
 import NodesInfo from "./nodesInfo";
 import NamespaceInfo from "./namespaceInfo";
+import Metrics from "../metrics/metrics";
+import MetricsDashboard from "../metrics/metrics";
 
 function SystemStatus(){
+
   return(
     <>
     <div> 
-      <NamespaceInfo />
-      <NodesInfo />
+      <MetricsDashboard />
     </div>
     </>
   )

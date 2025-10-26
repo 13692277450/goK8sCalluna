@@ -25,7 +25,7 @@ import {
 import logo from "../assets/logo.jpg";
 import reactLog from "../assets/react.svg";
 import { useNavigate, useLocation } from "react-router-dom";
-const withTooltip = (text, placement = 'right') => (
+const withTooltip = (text, placement = "right") => (
   <Tooltip title={text} placement={placement}>
     {text}
   </Tooltip>
@@ -38,41 +38,126 @@ const items = [
     label: <a>EXIT</a>,
   },
 ];
+// const itesMenuData = [
+//   {
+//     key: "system_menu",
+//     label: "SYSTEM MANAGE",
+//     children: [
+//       {
+//         key: "/admin/system_menu/employee_type",
+//         label: "SYSTEM STATUS",
+//       },
+//       {
+//         key: "/admin/system_menu/employee_list",
+//         label: "K8S STATUS",
+//       },
+//     ],
+//   },
+//   {
+//     key: "/admin/podslist_menu",
+//     label: "PODS MANAGE",
+//     children: [
+//       {
+//         key: "/admin/podslist_menu/podslit_type",
+//         label: "PODS LIST",
+//       },
+//       {
+//         key: "/admin/podslist_menu/resourcesInfo",
+//         label: "RESOURCES DETAILS",
+//       },
+//     ],
+//   },
+//   {
+//     key: "/admin/course_menu",
+//     label: "RESOURCE MANAGE",
+//   },
+// ];
+
 const itesMenuData = [
   {
     key: "system_menu",
-    label: "SYSTEM MANAGE",
+    icon: <MailOutlined style={{ color: "green" }} />,
+    label: withTooltip("SYSTEM MANAGE"),
     children: [
-      {
-        key: "/admin/system_menu/employee_type",
-        label: "SYSTEM STATUS",
+        {
+        icon: <PicLeftOutlined style={{ color: "red" }} />,
+        key: "/admin/system_status",
+        label: withTooltip("SYSTEM STATUS"),
       },
       {
-        key: "/admin/system_menu/employee_list",
-        label: "K8S STATUS",
-      },
+        icon: <PicLeftOutlined style={{ color: "orange" }} />,
+        key: "/admin/cluster_info",
+        label: withTooltip("CLUSTER INFO"),
+      },    
     ],
   },
   {
     key: "/admin/podslist_menu",
-    label: "PODS MANAGE",
+    icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+    label: withTooltip("INFO CENTER"),
     children: [
       {
-        key: "/admin/podslist_menu/podslit_type",
-        label: "PODS LIST",
+        key: "/admin/podsInfo",
+        icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+        label: withTooltip("PODS INFO"),
       },
       {
-        key: "/admin/podslist_menu/resourcesInfo",
-        label: "RESOURCES DETAILS",
+        key: "/admin/pvcsInfo",
+        icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+        label: withTooltip("PVCS INFO"),
+      },
+      {
+        key: "/admin/resourcesInfo",
+        icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+        label: withTooltip("RESOURCES INFO"),
       },
     ],
   },
   {
-    key: "/admin/course_menu",
-    label: "RESOURCE MANAGE",
+    key: "/admin/logs_menu",
+    icon: <ProfileOutlined style={{ color: "cyan" }} />,
+    label: withTooltip("LOGS MANAGE"),
+    children: [
+      {
+        key: "/admin/podsLogs",
+        icon: <ProfileOutlined style={{ color: "cyan" }} />,
+        label: withTooltip("PODS LOGS"),
+      },
+      {
+        key: "/admin/resourcesLogs",
+        icon: <ProfileOutlined style={{ color: "cyan" }} />,
+        label: withTooltip("RESOURCES LOGS"),
+      },
+    ],
+  },
+  {
+    key: "/admin/namespace",
+    icon: <ProfileOutlined style={{ color: "cyan" }} />,
+    label: withTooltip("NAMESPACE MANAGE"),
+    children: [
+      {
+        key: "/admin/namespaceInfo",
+        icon: <ProfileOutlined style={{ color: "cyan" }} />,
+        label: withTooltip("NAMESPACE INFO"),
+      },
+      {
+        key: "/admin/adddeletenamespace",
+        icon: <ProfileOutlined style={{ color: "cyan" }} />,
+        label: withTooltip("ADD DLETE NAMESPACE"),
+      },
+    ],
+  },
+  {
+    key: "/admin/workloading",
+    icon: <UserOutlined />,
+    label: withTooltip("WORKLOADING MANAGE"),
+  },
+  {
+    key: "/admin/storage",
+    icon: <UploadOutlined />,
+    label: withTooltip("STORAGE MANAGE"),
   },
 ];
-
 const createNavFn = (key) => {
   let arrObj = [];
   const demoFn = (arr) => {
@@ -147,85 +232,92 @@ const Mylayout = ({ children }) => {
           onClick={({ key }) => {
             navigate(key);
           }}
-          items={[
-            {
-              key: "system_menu",
-              icon: <MailOutlined style={{ color: "green" }} />,
-              label: withTooltip("SYSTEM MANAGE"),              children: [
-                {
-                  icon: <PicLeftOutlined style={{ color: "orange" }} />,
-                  key: "/admin/system_status",
-                  label: withTooltip("SYSTEM STATUS"),
-                },
-                {
-                  icon: <PicLeftOutlined style={{ color: "red" }} />,
-                  key: "/admin/clusterinfo",
-                  label: withTooltip("CLUSTER INFO"),
-                },
-              ],
-            },
-            {
-              key: "/admin/podslist_menu",
-              icon: <ReadOutlined style={{ color: "lightgreen" }} />,
-              label: withTooltip("PODS MANAGE"),
-              children: [
-                {
-                  key: "/admin/podsInfo",
-                  icon: <ReadOutlined style={{ color: "lightgreen" }} />,
-                  label: withTooltip("PODS INFO"),
-                },
-                {
-                  key: "/admin/resourcesInfo",
-                  icon: <ReadOutlined style={{ color: "lightgreen" }} />,
-                  label: withTooltip("RESOURCES INFO"),
-                },
-              ],
-            },
-            {
-              key: "/admin/logs_menu",
-              icon: <ProfileOutlined style={{ color: "cyan" }} />,
-              label: withTooltip("LOGS MANAGE"),
-              children: [
-                {
-                  key: "/admin/podsLogs",
-                  icon: <ProfileOutlined style={{ color: "cyan" }} />,
-                  label: withTooltip("PODS LOGS"),
-                },
-                {
-                  key: "/admin/resourcesLogs",
-                  icon: <ProfileOutlined style={{ color: "cyan" }} />,
-                  label: withTooltip("RESOURCES LOGS"),
-                },
-              ],
-            },
-            {
-              key: "/admin/namespace",
-              icon: <ProfileOutlined style={{ color: "cyan" }} />,
-              label: withTooltip("NAMESPACE MANAGE"),
-              children: [
-                {
-                  key: "/admin/namespaceInfo",
-                  icon: <ProfileOutlined style={{ color: "cyan" }} />,
-                  label: withTooltip("NAMESPACE INFO"),
-                },
-                {
-                  key: "/admin/adddeletenamespace",
-                  icon: <ProfileOutlined style={{ color: "cyan" }} />,
-                  label: withTooltip("ADD DLETE NAMESPACE"),
-                },
-              ],
-            },
-            {
-              key: "/admin/workloading",
-              icon: <UserOutlined />,
-              label: withTooltip("WORKLOADING MANAGE"),
-            },
-            {
-              key: "/admin/storage",
-              icon: <UploadOutlined />,
-              label: withTooltip("STORAGE MANAGE"),
-            },
-          ]}
+          items={itesMenuData}
+          // items={[
+          //   {
+          //     key: "system_menu",
+          //     icon: <MailOutlined style={{ color: "green" }} />,
+          //     label: withTooltip("SYSTEM MANAGE"),
+          //     children: [
+          //       {
+          //         icon: <PicLeftOutlined style={{ color: "orange" }} />,
+          //         key: "/admin/system_status",
+          //         label: withTooltip("SYSTEM STATUS"),
+          //       },
+          //       {
+          //         icon: <PicLeftOutlined style={{ color: "red" }} />,
+          //         key: "/admin/clusterinfo",
+          //         label: withTooltip("CLUSTER INFO"),
+          //       },
+          //     ],
+          //   },
+          //   {
+          //     key: "/admin/podslist_menu",
+          //     icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+          //     label: withTooltip("INFO CENTER"),
+          //     children: [
+          //       {
+          //         key: "/admin/podsInfo",
+          //         icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+          //         label: withTooltip("PODS INFO"),
+          //       },
+          //       {
+          //         key: "/admin/pvcsInfo",
+          //         icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+          //         label: withTooltip("PVCS INFO"),
+          //       },
+          //       {
+          //         key: "/admin/resourcesInfo",
+          //         icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+          //         label: withTooltip("RESOURCES INFO"),
+          //       },
+          //     ],
+          //   },
+          //   {
+          //     key: "/admin/logs_menu",
+          //     icon: <ProfileOutlined style={{ color: "cyan" }} />,
+          //     label: withTooltip("LOGS MANAGE"),
+          //     children: [
+          //       {
+          //         key: "/admin/podsLogs",
+          //         icon: <ProfileOutlined style={{ color: "cyan" }} />,
+          //         label: withTooltip("PODS LOGS"),
+          //       },
+          //       {
+          //         key: "/admin/resourcesLogs",
+          //         icon: <ProfileOutlined style={{ color: "cyan" }} />,
+          //         label: withTooltip("RESOURCES LOGS"),
+          //       },
+          //     ],
+          //   },
+          //   {
+          //     key: "/admin/namespace",
+          //     icon: <ProfileOutlined style={{ color: "cyan" }} />,
+          //     label: withTooltip("NAMESPACE MANAGE"),
+          //     children: [
+          //       {
+          //         key: "/admin/namespaceInfo",
+          //         icon: <ProfileOutlined style={{ color: "cyan" }} />,
+          //         label: withTooltip("NAMESPACE INFO"),
+          //       },
+          //       {
+          //         key: "/admin/adddeletenamespace",
+          //         icon: <ProfileOutlined style={{ color: "cyan" }} />,
+          //         label: withTooltip("ADD DLETE NAMESPACE"),
+          //       },
+          //     ],
+          //   },
+          //   {
+          //     key: "/admin/workloading",
+          //     icon: <UserOutlined />,
+          //     label: withTooltip("WORKLOADING MANAGE"),
+          //   },
+          //   {
+          //     key: "/admin/storage",
+          //     icon: <UploadOutlined />,
+          //     label: withTooltip("STORAGE MANAGE"),
+          //   },
+          // ]}
         />
       </Sider>
       <Layout>
