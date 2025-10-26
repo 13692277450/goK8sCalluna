@@ -6,8 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SystemControllerInit(r *gin.Engine) {
-	SystemRouters := r.Group("/")
+func SystemCenterRoutersInit(r *gin.Engine) {
+	SystemRouters := r.Group("/api")
 	{
 		SystemRouters.GET("/systeminfo", system.SystemController{}.SystemControllers)
 	}

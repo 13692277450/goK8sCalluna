@@ -6,12 +6,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func PodsLogRouterInit(r *gin.Engine) {
+func PodsLogRoutersInit(r *gin.Engine) {
 
-	podsLogRouters := r.Group("/")
+	podsLogRouters := r.Group("/api")
 	{
-		podsLogRouters.GET("/api/pods/logs", logs.PodLogsController{}.PodsLogController)
-		podsLogRouters.GET("/podsLogs.html", logs.PodLogsController{}.PodsLogController)
+		podsLogRouters.GET("/pods/logs", logs.PodLogsController{}.PodsLogController)
 	}
 
 }

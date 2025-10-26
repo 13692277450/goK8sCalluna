@@ -14,17 +14,6 @@ func AdminRoutersInit(r *gin.Engine) {
 		adminRouters.GET("/account", admin.AdminController{}.Account)
 		adminRouters.GET("/add", admin.AdminController{}.Add)
 		adminRouters.GET("/home", admin.AdminController{}.Home)
-		// pvcController, err := admin.PVCController()
-		// if err != nil {
-		// 	panic(err)
-		// }
-		// adminRouters.GET("/pvcs", func(c *gin.Context) {
-		// 	pvcs, err := PVCController.GetPVCList(c.Request.Context(), "default")
-		// 	if err != nil {
-		// 		c.JSON(500, gin.H{"error": err.Error()})
-		// 		return
-		// 	}
-		// 	c.JSON(200, pvcs)
-		// })
+
 	}
 }

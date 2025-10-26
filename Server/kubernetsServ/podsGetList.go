@@ -101,23 +101,7 @@ func GetK8sPods() []models.PodInfo {
 	}
 	models.SetPods(PodInfos)
 	return PodInfos
-	//ok
-	// var ns, label, field string
-	// flag.StringVar(&ns, "namespace", "", "namespace")
-	// flag.StringVar(&label, "l", "", "Label selector")
-	// flag.StringVar(&field, "f", "", "Field selector")
 
-	// api := Clientset.CoreV1()
-	// // setup list options
-	// listOptions := metav1.ListOptions{
-	// 	LabelSelector: label,
-	// 	FieldSelector: field,
-	// }
-	// pvcs, err := api.PersistentVolumeClaims(ns).List(context.TODO(), listOptions)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Println("Pvc List: ", pvcs)
 }
 
 //fmt.Println("Pvcs: ", pvcs)

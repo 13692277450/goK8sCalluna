@@ -6,11 +6,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type PodsController struct{}
+type PodsControllers struct{}
 
 // var podsJsonInfo models.PodInfo
 
-func (p PodsController) ResponsePodsListController(c *gin.Context) {
+func (p PodsControllers) ResponsePodsListController(c *gin.Context) {
 
 	c.JSON(200, kubernetsServ.GetK8sPods())
 }

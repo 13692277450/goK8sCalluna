@@ -18,30 +18,30 @@ var (
 	Clientset  *kubernetes.Clientset
 )
 
-// embeded: kubeconfig: ./kubeconfig
+// embedded: kubeconfig: ./kubeconfig
 
 var kubeconfigEmbed embed.FS
 
 func K8sConnectionInit() {
-	// 初始化客户端
+	// Initialize client
 	Kubeconfig = flag.String("kubeconfig", "kubeconfig", "")
-	flag.Parse() // 确保解析命令行参数
+	flag.Parse() // Ensure parsing command line arguments
 
 	var err error
-	// 加载主配置
+	// Load main configuration
 	Config, err = clientcmd.BuildConfigFromFlags("", *Kubeconfig)
 	if err != nil {
-		fmt.Printf("加载主配置失败: %v\n", err)
+		fmt.Printf("Failed to load main configuration: %v\n", err)
 		panic(err.Error())
 	}
 
-	// 初始化资源获取配置（与主配置相同）
+	// Initialize resource acquisition configuration (same as main configuration)
 	ConfigR = Config
 
-	// 创建Clientset
+	// Create Clientset
 	Clientset, err = kubernetes.NewForConfig(Config)
 	if err != nil {
-		fmt.Printf("创建Clientset失败: %v\n", err)
+		fmt.Printf("Failed to create Clientset: %v\n", err)
 		log.Fatal(err)
 	}
 }

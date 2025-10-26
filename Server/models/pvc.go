@@ -8,8 +8,16 @@ type PVCInfo struct {
 	StorageClass string
 	Capacity     string
 	AccessModes  []string
-	VolumeName   string
 	CreationTime string
+	// ResourceVersion string
+	// APIVersion      string
+	// GenerateName    string
+	// Labels          string
+	UID string
+	// Annotations     string
+	// OwnerReferences string
+	// Finalizers      string
+	// Selector        string
 }
 
 var Pvcs []PVCInfo
