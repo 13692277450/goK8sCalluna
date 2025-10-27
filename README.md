@@ -1,3 +1,9 @@
+
+2025.10.27 update: Add pods running status page and setup auto refresh per 5 minutes.
+
+<img width="2531" height="1524" alt="image" src="https://github.com/user-attachments/assets/e8f585f2-ca53-438d-aa19-d1946bc51318" />
+
+
 2025.10.26 update: Add k8s cluster server cpu, memory... etc usage collect and monitor from metrics-server ver 0.8.0 in backend server side, update metrics-server data demonstrate on webpage in client UI.
 
 <img width="2559" height="1232" alt="image" src="https://github.com/user-attachments/assets/030c7a3f-de8a-469e-b2f0-0ea2052f5002" />
