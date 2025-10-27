@@ -77,9 +77,9 @@ const columns=[
       >
        
         {loading ? (
-          <div>Loading pod data...</div>
+          <div>Loading namespace data...</div>
         ) : error ? (
-          <div>Error loading pod data: {error.message}</div>
+          <div>Error loading namespace data: {error.message}</div>
         ) : (
          
           <Table

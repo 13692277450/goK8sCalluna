@@ -30,3 +30,29 @@ export const useFetch = (endpoint) => {
 
   return { data, loading, error };
 };
+
+
+export const useFetchMock = (urlMock) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(urlMock);
+        setData(res.data);
+      } catch (err) {
+        console.error(`Error fetching ${url}: ${err}`);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, [urlMock]);
+
+  return { data, loading, error };
+};

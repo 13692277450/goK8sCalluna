@@ -10,6 +10,9 @@ import {
   BulbFilled,
   MailOutlined,
   ProfileOutlined,
+  SettingOutlined,
+  PieChartOutlined,
+  DashboardFilled,
 } from "@ant-design/icons";
 import {
   Button,
@@ -21,6 +24,7 @@ import {
   message,
   Breadcrumb,
   Tooltip,
+  
 } from "antd";
 import logo from "../assets/logo.jpg";
 import reactLog from "../assets/react.svg";
@@ -38,7 +42,7 @@ const items = [
     label: <a>EXIT</a>,
   },
 ];
-// const itesMenuData = [
+// const itemsMenuData = [
 //   {
 //     key: "system_menu",
 //     label: "SYSTEM MANAGE",
@@ -73,22 +77,26 @@ const items = [
 //   },
 // ];
 
-const itesMenuData = [
+const itemsMenuData = [
   {
     key: "system_menu",
-    icon: <MailOutlined style={{ color: "green" }} />,
+    icon: <SettingOutlined style={{ color: "green" }} />,
     label: withTooltip("SYSTEM MANAGE"),
     children: [
         {
-        icon: <PicLeftOutlined style={{ color: "red" }} />,
+        icon: <PieChartOutlined style={{ color: "red" }} />,
         key: "/admin/system_status",
         label: withTooltip("SYSTEM STATUS"),
       },
       {
+        icon: <DashboardFilled style={{ color: "orange" }} />,
+        key: "/admin/cluster_status",
+        label: withTooltip("CLUSTER STATUS"),
+      },        {
         icon: <PicLeftOutlined style={{ color: "orange" }} />,
-        key: "/admin/cluster_info",
-        label: withTooltip("CLUSTER INFO"),
-      },    
+        key: "/admin/pods_status",
+        label: withTooltip("PODS STATUS"),
+      },   
     ],
   },
   {
@@ -169,7 +177,7 @@ const createNavFn = (key) => {
       }
     });
   };
-  demoFn(itesMenuData);
+  demoFn(itemsMenuData);
   const temp = arrObj.filter((m) => key.includes(m.key));
   if (temp.length > 0) {
     return [
@@ -193,7 +201,7 @@ const searchUrlKey = (key) => {
       }
     });
   };
-  demoFn(itesMenuData);
+  demoFn(itemsMenuData);
   return arrObj;
 };
 const Mylayout = ({ children }) => {
@@ -232,7 +240,7 @@ const Mylayout = ({ children }) => {
           onClick={({ key }) => {
             navigate(key);
           }}
-          items={itesMenuData}
+          items={itemsMenuData}
           // items={[
           //   {
           //     key: "system_menu",

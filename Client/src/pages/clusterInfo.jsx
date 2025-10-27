@@ -9,7 +9,7 @@ import { useFetch } from "../utils/useFetch";
 import NodesInfo from "./nodesInfo";
 import NamespaceInfo from "./namespaceInfo";
 
-function ClusterInfo(){
+function ClusterStatus(){
   return(
     <>
     <div> 
@@ -19,4 +19,4 @@ function ClusterInfo(){
     </>
   )
 }
-export default ClusterInfo
+export default ClusterStatus

@@ -10,11 +10,11 @@ import ResourcesInfo from "./pages/resourcesInfo";
 import PodsInfo from "./pages/podsInfo";
 import PVCsInfo from "./pages/pvcsInfo";
 import { Content } from "antd/es/layout/layout";
-import Clock from "./pages/SysncClock";
 import SynscClock from "./pages/SysncClock";
 import FetchPodsList from "./pages/fetchPodsList";
 import PodsLogs from "./pages/podsLogs";
-import ClusterInfo from "./pages/clusterInfo";
+import PodsRunningStatus from "./pages/podsRunningStatus";
+import ClusterStatus from "./pages/clusterInfo";
 
 
 function App() {
@@ -23,9 +23,10 @@ function App() {
   return (    
     <div>
       <Mylayout>
-        <Routes>
+        <Routes>P
           <Route path="system_status" element={<SystemStatus />} />
-          <Route path="cluster_info" element={<ClusterInfo />} />
+          <Route path="cluster_status" element={<ClusterStatus />} />
+          <Route path="pods_status" element={<PodsRunningStatus />} />
           <Route path="podsInfo" element={<PodsInfo />} />
           <Route path="pvcsInfo" element={<PVCsInfo />} />
           <Route path="resourcesInfo" element={<ResourcesInfo />} />
