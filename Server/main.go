@@ -18,7 +18,6 @@ import (
 	"gok8s/kubernetsServ"
 	"gok8s/models"
 	"gok8s/routers"
-	"gok8s/services"
 	"net/http"
 	"text/template"
 
@@ -91,8 +90,8 @@ func main() {
 	// GET and POST
 	r.GET("/login", loginController.ShowLoginPage)
 	r.POST("/login", loginController.Login)
-	go services.K8sNodesPerformance()
-	go services.K8sPodsPerformance()
+	// go services.K8sNodesPerformance()
+	// go services.K8sPodsPerformance()
 	//r.Use(middleWear, middleWear) // 全局中间件, 多个中间件用逗号隔开
 	//如果使用了goroutine，则必须使用c.context拷贝,c.Copy()
 	r.Run(":8080")
