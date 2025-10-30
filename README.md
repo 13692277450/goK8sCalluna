@@ -24,15 +24,15 @@ How to run this application? so easy, 5 steps only:
 <img width="2559" height="1232" alt="image" src="https://github.com/user-attachments/assets/030c7a3f-de8a-469e-b2f0-0ea2052f5002" />
 
 
+
 2025.10.25 update: Add function to deploy Yaml to server auto create resources, pod... etc.
 
 <img width="2551" height="1531" alt="image" src="https://github.com/user-attachments/assets/803239f1-b03b-4675-9595-aba9c6746865" />
 
-=======================================================================================================================================
-
 
 
 <img width="2554" height="1517" alt="image" src="https://github.com/user-attachments/assets/ac4667dd-1153-4c90-a44d-8130764de3a0" />
+
 
 <img width="2530" height="1459" alt="image" src="https://github.com/user-attachments/assets/22ce423a-363f-463a-a7b3-c8bd4b732ed6" />
 
