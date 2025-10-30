@@ -1,4 +1,19 @@
+Front and backend full stack design. server code can running on Server or client, because it use .kube\config file in Golang code with embed file block, but later I should conside kubeconfig was changed and how to get fresh config from server.
 
+K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Ubuntu, this project plan build an excellent K8s management tool in the next two year, pls kindly support me and join together! Thanks.
+Now, it can get Pods info and show, resources info, log info, deploy pod..., I will continue update.
+
+How to run this application? so easy, 5 steps only: 
+
+1. Setup your K8S cluster system.
+2. copy .kube\kubeconfig to Server\kubernetsServ\kubeconfig.
+3. Modify Server\kubernetsServ\kubeconfig file, chang server: https://192.168.1.211:6443 to your K8s master server if IP address was wrong.
+4. go run . then can run your backend server.
+5. Enter into client folder, modify uitils\useFech.js, modify ip address to your ip address: " API_BASIC_URL = 'http://localhost:8080/api'; //connect to Golang backend api server port. "
+6. Run "npm run dev".
+7. Then you can access K8s manage tool by browser.
+
+   
 2025.10.27 update: Add pods running status page and setup auto refresh per 5 minutes.
 
 <img width="2531" height="1524" alt="image" src="https://github.com/user-attachments/assets/e8f585f2-ca53-438d-aa19-d1946bc51318" />
@@ -15,20 +30,7 @@
 
 =======================================================================================================================================
 
-Front and backend full stack design. server code can running on Server or client, because it use .kube\config file in Golang code with embed file block, but later I should conside kubeconfig was changed and how to get fresh config from server.
 
-K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Ubuntu, this project plan build an excellent K8s management tool in the next two year, pls kindly support me and join together! Thanks.
-Now, it can get Pods info and show, resources info, log info, deploy pod..., I will continue update.
-
-How to run this application? so easy, 5 steps only: 
-
-1. Setup your K8S cluster system.
-2. copy .kube\kubeconfig to Server\kubernetsServ\kubeconfig.
-3. Modify Server\kubernetsServ\kubeconfig file, chang server: https://192.168.1.211:6443 to your K8s master server if IP address was wrong.
-4. go run . then can run your backend server.
-5. Enter into client folder, modify uitils\useFech.js, modify ip address to your ip address: " API_BASIC_URL = 'http://localhost:8080/api'; //connect to Golang backend api server port. "
-6. Run "npm run dev".
-7. Then you can access K8s manage tool by browser.
 
 <img width="2554" height="1517" alt="image" src="https://github.com/user-attachments/assets/ac4667dd-1153-4c90-a44d-8130764de3a0" />
 
