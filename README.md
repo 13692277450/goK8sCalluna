@@ -1,11 +1,11 @@
 Front and backend full stack design. server code can running on Server or client, because it use .kube\config file in Golang code with embed file block, but later I should conside kubeconfig was changed and how to get fresh config from server.
 
-K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Ubuntu, this project plan build an excellent K8s management tool in the next two year, pls kindly support me and join together! Thanks.
+K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Docker, Ubuntu, this project plan build an excellent K8s management tool in the next two year, pls kindly support me and join together! Thanks.
 Now, it can get Pods info and show, resources info, log info, deploy pod..., I will continue update.
 
 How to run this application? so easy, 5 steps only: 
 
-1. Setup your K8S cluster system.
+1. Setup your K8S cluster system and metrics server, Kafka4.1.0.
 2. copy .kube\kubeconfig to Server\kubernetsServ\kubeconfig.
 3. Modify Server\kubernetsServ\kubeconfig file, chang server: https://192.168.1.211:6443 to your K8s master server if IP address was wrong.
 4. go run . then can run your backend server.
