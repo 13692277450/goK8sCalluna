@@ -12,6 +12,7 @@ func DeployYamlRoutersInit(r *gin.Engine) {
 	{
 		// 注册DeployYamlController来处理YAML部署
 		yamlRouters.POST("/deploypod", deploy.DeployYamlController)
+		yamlRouters.POST("/deploynamespace", deploy.DeployNamespaceControllers{}.DeployNamespaceController)
 		// fmt.Println("Deploy Yaml router initialized successfully")
 	}
 }

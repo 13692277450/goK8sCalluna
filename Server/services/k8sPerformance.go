@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"time"
 
 	"gok8s/kubernetsServ"
@@ -183,6 +184,7 @@ func K8sPodsPerformance() []models.MetricsPods {
 				Container: container.Name,
 				Cpu:       cpuUsage.AsApproximateFloat64(),
 				Memory:    memoryUsage.AsApproximateFloat64(),
+				Size:      strconv.Itoa(pod.Size()),
 			}
 			PodsResult = append(PodsResult, podData)
 			models.SetMetricsPods(PodsResult)

@@ -12,6 +12,7 @@ type MetricsPods struct {
 	Container string  `json:"container"`
 	Cpu       float64 `json:"cpu"`
 	Memory    float64 `json:"memory"`
+	Size      string  `json:"size"`
 }
 
 type Metrics struct {

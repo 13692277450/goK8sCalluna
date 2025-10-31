@@ -24,7 +24,11 @@ var kubeconfigEmbed embed.FS
 
 func K8sConnectionInit() {
 	// Initialize client
+	// if home := homedir.HomeDir(); home != "" {
+	// 	Kubeconfig = flag.String("kubeconfig", filepath.Join(home, ".kube", "config"), "(optional) absolute path to the kubeconfig file")
+	// } else {
 	Kubeconfig = flag.String("kubeconfig", "kubeconfig", "")
+	//}
 	flag.Parse() // Ensure parsing command line arguments
 
 	var err error

@@ -90,6 +90,7 @@ func main() {
 	// GET and POST
 	r.GET("/login", loginController.ShowLoginPage)
 	r.POST("/login", loginController.Login)
+	//kubernetsServ.GetPodResources("default", "mysqlwordpress")
 	// go services.K8sNodesPerformance()
 	// go services.K8sPodsPerformance()
 	//r.Use(middleWear, middleWear) // 全局中间件, 多个中间件用逗号隔开
