@@ -1,3 +1,5 @@
+                                                   GoK8sCalluna - K8s Manage Tool
+
 Front and backend full stack design. server code can running on Server or client, because it use .kube\config file in Golang code with embed file block, but later I should conside kubeconfig was changed and how to get fresh config from server.
 
 K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Docker, Ubuntu, this project plan build an excellent K8s management tool in the next two year, pls kindly support me and join together! Thanks.
