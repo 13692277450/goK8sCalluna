@@ -2,7 +2,7 @@
 
 Front and backend full stack design. server code can running on Server or client, because it use .kube\config file in Golang code with embed file block, but later I should conside kubeconfig was changed and how to get fresh config from server.
 
-K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Docker, Ubuntu, this project plan build an excellent K8s management tool in the next two year, pls kindly support me and join together! Thanks.  
+K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Docker, Ubuntu, this project plan build an excellent K8s management tool in the next two years, pls kindly support me and join together! Thanks.  
 Now, it can get Pods info and show, resources info, log info, deploy pod..., I will continue update.
 
 **How to run this application? so easy, 5 steps only:**
@@ -15,7 +15,7 @@ Now, it can get Pods info and show, resources info, log info, deploy pod..., I w
 6. Run "npm run dev".  
 7. Then you can access K8s manage tool by browser.
 
-*2025.10.31 update: Add delete function in pods information page(pls notice for permant delete pod, this code need delete pod's create style including deploy, namespace, cronjob...., the code can identify which create pod type used but be careful if you have other pod in deployment or namespace..., you can modify code you want which one is your prefer chooice.), build function to add namespace function page. will try add kafka function in code at next stage.*
+*2025.10.31 update: Add delete function in pods information page(pls notice for permant delete pod, this code need delete pod's create style including deployment, namespace, cronjob...., the code can identify which create pod type used but be careful if you have other pod in deployment or namespace..., you can modify code you want which one is your prefer chooice.); build function to add namespace function page. will try add kafka function in code at next stage.*
 
 <img width="2559" height="1599" alt="image" src="https://github.com/user-attachments/assets/9320dffe-f3a9-470d-a6ae-dd9abf2ef78d" />
 
