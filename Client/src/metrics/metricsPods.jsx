@@ -24,7 +24,8 @@ const formatMemory = (bytes) => {
 
 const MetricsPodsDashboard = () => {
   // 从API获取节点数据 - 使用正确的API URL
-  const { data: rawPodData, loading, error } = useFetchMock("https://mock.presstime.cn/mock/68fee0b65e1f18b9172f3143/example/api/metrics/pods#!method=get");
+  //const { data: rawPodData, loading, error } = useFetchMock("https://mock.presstime.cn/mock/68fee0b65e1f18b9172f3143/example/api/metrics/pods#!method=get");
+  const { data: rawPodData, loading, error } = useFetch(`${"metrics/pods"}`);
 
   // 处理API返回的数据 - 确保数据格式正确
   const processPodData = (rawData) => {
@@ -54,10 +55,11 @@ const MetricsPodsDashboard = () => {
   // 每5分钟自动刷新
   React.useEffect(() => {
     let isMounted = true;
-    
+
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://mock.presstime.cn/mock/68fee0b65e1f18b9172f3143/example/api/metrics/pods#!method=get");
+        // const res = await axios.get("https://mock.presstime.cn/mock/68fee0b65e1f18b9172f3143/example/api/metrics/pods#!method=get");
+        const res = await axios.get("http://localhost:8080/api/metrics/pods");
         if (isMounted) {
           setPodData(processPodData(res.data));
         }
@@ -68,7 +70,7 @@ const MetricsPodsDashboard = () => {
 
     // 立即执行一次
     fetchData();
-    
+
     // 设置5分钟(300000毫秒)的定时器
     const interval = setInterval(fetchData, 300000);
 
@@ -86,11 +88,27 @@ const MetricsPodsDashboard = () => {
 
   // 加载状态组件
   const LoadingPlaceholder = () => (
-    <Placeholder.Grid columns={1} active>
-      <Placeholder.Paragraph style={{ height: 120 }} />
-      <Placeholder.Paragraph style={{ height: 120 }} />
-      <Placeholder.Paragraph style={{ height: 120 }} />
-    </Placeholder.Grid>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        padding: "40px",
+      }}
+    >
+      <div
+        style={{
+          padding: "20px",
+          //backgroundColor: '#f5f5f5',
+          borderRadius: "4px",
+          color: "#ee8282ff",
+          fontStyle: "italic",
+          fontSize: "16px",
+          textAlign: "center",
+        }}
+      >
+        Loading pod metrics data, pls wait...
+      </div>
+    </div>
   );
 
   // 错误提示组件
@@ -111,15 +129,8 @@ const MetricsPodsDashboard = () => {
 
   // 根据节点数据创建统计卡片 - 添加可视化组件
   const renderPodStats = (Pod) => {
-    if (loading) {
-  return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      Loading data...
-    </div>
-  );
-}
     if (!Pod) return null;
-// 确保CPU值在0-1范围内
+    // 确保CPU值在0-1范围内
     const cpuValue = Math.min(1, Math.max(0, Pod.cpu || 0)) * 100;
     const memoryValue = Math.min(1, Math.max(0, Pod.memory || 0)) * 100;
     // 为不同节点分配不同颜色
@@ -134,83 +145,112 @@ const MetricsPodsDashboard = () => {
       return colors[0]; // Green for low CPU usage
     };
 
-    
-
-      return (
-      <Card 
+    return (
+      <Card
+        size=""
         key={Pod.pod_name}
         bordered={true}
-        style={{ 
+        style={{
           textAlign: "center",
           alignSelf: "center",
           alignItems: "center",
-          marginBottom: '20px',
-          width: '100%',
-          minWidth: '300px'
+          marginBottom: "5px",
+          width: "100%",
+          minWidth: "300px",
+          maxWidth: "300px",
+          minHeight: "320px",
+          maxHeight: "320px",
         }}
       >
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '16px'
-        }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: '16px',
-            marginRight:'80px',
-            color:"darkblue",
-
-          }}>
-            <Stat.Label>POD NAME:  {Pod.pod_name}</Stat.Label>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            padding: "16px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "16px",
+              marginRight: "80px",
+              color: "darkblue",
+            }}
+          >
+            <Stat.Label>POD NAME: {Pod.pod_name}</Stat.Label>
           </div>
-          
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '8px'
-          }}>
-            <span>CPU USAGE</span>
-            <div style={{ 
-              color:'blue',
-              fontSize: '16px',
 
-              position: 'relative',
-              width: '100%',
-              maxWidth: '100px',
-              aspectRatio: '1/1'  // 保持正方形
-            }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "8px",
+              fontWeight: "bold",
+            }}
+          >
+            <span>CPU USAGE</span>
+            <div
+              style={{
+                color: "blue",
+                fontSize: "16px",
+
+                position: "relative",
+                width: "100%",
+                maxWidth: "100px",
+                aspectRatio: "1/1", // 保持正方形
+              }}
+            >
               <Progress.Circle
                 trailColor="lightblue"
                 percent={cpuValue}
                 value={cpuValue}
-                width="100%"
+                //width="100%"
                 strokeColor={getPodColor(Pod.cpu)}
                 strokeWidth={8}
                 trailWidth={8}
                 max={100}
                 showInfo={false}
               />
-              <div style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                fontSize: '14px'
-              }}>
-                {(cpuValue).toFixed(0)}%
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  fontSize: "14px",
+                }}
+              >
+                {cpuValue.toFixed(0)}%
               </div>
             </div>
           </div>
-          
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}>
-            <span>MEMORY USAGE</span>
-            <Stat.Value>{formatMemory(Pod.memory)}</Stat.Value>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              marginTop: "8px",
+              fontFamily: "monospace",
+              marginBottom: "5px",
+              position: "absolute",
+              bottom: "5px",
+              alignSelf: "center",
+            }}
+          >
+            <div>
+              <span style={{ fontWeight: "bold", color: "blue" }}>
+                MEMORY USAGE:{" "}
+              </span>
+              {formatMemory(Pod.memory)}
+            </div>
+            <div style={{ marginTop: "4px" }}>
+              <span style={{ fontWeight: "bold", color: "blue" }}>
+                POD SIZE:{" "}
+              </span>
+              {formatMemory(Pod.size)}
+            </div>
           </div>
         </div>
       </Card>
@@ -219,21 +259,30 @@ const MetricsPodsDashboard = () => {
 
   return (
     <div style={{ padding: "24px", background: "#f0f2f5" }}>
-      <h1 style={{ textAlign: "center", marginBottom: "32px", color:'blueviolet'}}>
+      <h1
+        style={{
+          textAlign: "center",
+          marginBottom: "32px",
+          color: "blueviolet",
+        }}
+      >
+        KUBERNETS PODS DASHBOARD
       </h1>
 
       {/* 加载状态和错误处理 */}
-      {loading && <LoadingPlaceholder />}
+      {loading && !error && <LoadingPlaceholder />}
       {error && <ErrorAlert error={error} />}
 
       {/* 显示节点指标 - 使用CSS Grid实现三列排列 */}
       {!loading && !error && podData && (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          gap: '20px',
-          width: '100%'
-        }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gap: "20px",
+            width: "100%",
+          }}
+        >
           {podData.map(renderPodStats)}
         </div>
       )}

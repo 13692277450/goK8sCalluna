@@ -15,6 +15,7 @@ import FetchPodsList from "./pages/fetchPodsList";
 import PodsLogs from "./pages/podsLogs";
 import PodsRunningStatus from "./pages/podsRunningStatus";
 import ClusterStatus from "./pages/clusterInfo";
+import NamespaceInfoModify from "./pages/namespaceInfoModify";
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
           <Route path="pvcsInfo" element={<PVCsInfo />} />
           <Route path="resourcesInfo" element={<ResourcesInfo />} />
           <Route path="podsLogs" element={<PodsLogs />} />
-          <Route path="SynscClock" element={<SynscClock />} />
+          <Route path="namespaceInfoModify" element={<NamespaceInfoModify />} />
           <Route path="course_menu" element={<CourseManagment />} />
         </Routes>
       </Mylayout>   

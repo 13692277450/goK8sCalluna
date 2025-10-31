@@ -51,11 +51,34 @@ const MetricsNodesDashboard = () => {
 
   // 加载状态组件
   const LoadingPlaceholder = () => (
+     <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        padding: "40px",
+      }}
+    >
+      <div
+        style={{
+          padding: "20px",
+          //backgroundColor: '#f5f5f5',
+          borderRadius: "4px",
+          color: "#ed08e2ff",
+          fontStyle: "italic",
+          fontSize: "16px",
+          textAlign: "center",
+          //fontWeight: 'bold',
+        }}
+      >
+        Loading Nodes metrics data, pls wait...
+      </div>
     <Placeholder.Grid columns={1} active>
       <Placeholder.Paragraph style={{ height: 120 }} />
       <Placeholder.Paragraph style={{ height: 120 }} />
       <Placeholder.Paragraph style={{ height: 120 }} />
     </Placeholder.Grid>
+        </div>
+
   );
 
   // 错误提示组件
@@ -76,11 +99,27 @@ const MetricsNodesDashboard = () => {
 
   // 根据节点数据创建统计卡片 - 添加可视化组件
   const renderNodeStats = (node) => {
+    if (loading) {
+      return (
+        <div
+          style={{
+            padding: "20px",
+            color: "#ee8282ff",
+            fontStyle: "italic",
+            fontSize: "16px",
+            textAlign: "center",
+            alignSelf: "center",
+          }}
+        >
+          Loading nodes data, pls wait...
+        </div>
+      );
+    }
     if (!node) return null;
 
     // 为不同节点分配不同颜色
     const getNodeColor = (cpuValue) => {
-       const colors = ["#19f432ff", "#eef115ff", "#f70e21ff"];
+      const colors = ["#19f432ff", "#eef115ff", "#f70e21ff"];
       // const hash = PodName
       //   .split("")
       //   .reduce((acc, char) => acc + char.charCodeAt(0), 0);
@@ -94,81 +133,92 @@ const MetricsNodesDashboard = () => {
     const cpuValue = Math.min(1, Math.max(0, node.cpu || 0)) * 100;
     const memoryValue = Math.min(1, Math.max(0, node.memory || 0)) * 100;
 
-      return (
-      <Card 
+    return (
+      <Card
         key={node.node_name}
         bordered={true}
-        style={{ 
+        style={{
           textAlign: "center",
           alignSelf: "center",
           alignItems: "center",
-          marginBottom: '20px',
-          width: '100%',
-          minWidth: '300px'
+          marginBottom: "20px",
+          width: "100%",
+          minWidth: "300px",
         }}
       >
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '16px'
-        }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: '16px',
-            marginRight:'80px',
-            color:"darkblue",
-
-          }}>
-            <Stat.Label>NODE NAME:  {node.node_name}</Stat.Label>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            padding: "16px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "16px",
+              marginRight: "80px",
+              color: "darkblue",
+            }}
+          >
+            <Stat.Label><h4 style={{fontWeight:'bold'}}>NODE NAME: </h4> {node.node_name}</Stat.Label>
           </div>
-          
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '8px'
-          }}>
-            <span>CPU USAGE</span>
-            <div style={{ 
-              color:'blue',
-              fontSize: '16px',
 
-              position: 'relative',
-              width: '100%',
-              maxWidth: '100px',
-              aspectRatio: '1/1'  // 保持正方形
-            }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "8px",
+            }}
+          >
+            <span style={{fontWeight:'bold',color:'darkblue'}}>CPU USAGE</span>
+            <div
+              style={{
+                color: "blue",
+                fontSize: "16px",
+
+                position: "relative",
+                width: "100%",
+                maxWidth: "100px",
+                aspectRatio: "1/1", // 保持正方形
+              }}
+            >
               <Progress.Circle
-                trailColor="gray"
+                trailColor="lightblue"
                 percent={cpuValue}
                 value={cpuValue}
                 width="100%"
-                strokeColor={getNodeColor()}
+                strokeColor={getNodeColor(node.cpu)}
                 strokeWidth={8}
                 trailWidth={8}
                 max={100}
                 showInfo={false}
               />
-              <div style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                fontSize: '14px'
-              }}>
-                {(cpuValue).toFixed(0)}%
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  fontSize: "14px",
+                }}
+              >
+                {cpuValue.toFixed(0)}%
               </div>
             </div>
           </div>
-          
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}>
-            <span>MEMORY USAGE</span>
-            <Stat.Value>{formatMemory(node.memory)}</Stat.Value>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <span style={{color: 'darkblue'}}><h4 style={{fontWeight:'bold'}}>MEMORY USAGE</h4>  {formatMemory(node.memory)}</span>
+            
           </div>
         </div>
       </Card>
@@ -177,7 +227,13 @@ const MetricsNodesDashboard = () => {
 
   return (
     <div style={{ padding: "24px", background: "#f0f2f5" }}>
-      <h1 style={{ textAlign: "center", marginBottom: "32px", color:'blueviolet'}}>
+      <h1
+        style={{
+          textAlign: "center",
+          marginBottom: "32px",
+          color: "blueviolet",
+        }}
+      >
         KUBERNETS METRICS DASHBOARD
       </h1>
 
@@ -187,12 +243,14 @@ const MetricsNodesDashboard = () => {
 
       {/* 显示节点指标 - 使用CSS Grid实现三列排列 */}
       {!loading && !error && nodeData && (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          gap: '60px',
-          width: '100%'
-        }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gap: "60px",
+            width: "100%",
+          }}
+        >
           {nodeData.map(renderNodeStats)}
         </div>
       )}

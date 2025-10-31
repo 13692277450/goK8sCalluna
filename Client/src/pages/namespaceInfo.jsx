@@ -45,6 +45,8 @@ const paginationChange = async (current, size) => {
     pageSize: size,  //当前所在页面数据数量
   })
 }
+
+
 const columns=[
             {
               title: "Name",

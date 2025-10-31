@@ -1,27 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Form, Input, Table, Modal, message, Space } from "antd";
+import { Card, Button, Form, Input, Table, Modal, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import MyUpload from "../components/myUpload";
 import axios from "axios";
+// import { get } from "../utils/request";
 import "./pagesCSS.css";
 import { useFetch } from "../utils/useFetch";
-
-// 从useFetch导入API_BASIC_URL
 import { API_BASIC_URL } from "../utils/useFetch";
 
-function PodsInfo() {
+
+function NamespaceInfoModify() {
   const { TextArea } = Input;
-  const [yamlContent, setYamlContent] = useState("");
+  const [yamlContent, setYamlContent] = useState(`# pls refer to the example below:
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: example-namespace
+  labels:
+    app: example
+    environment: production
+  annotations:
+    description: "This namespace is for example application"
+    managed-by: "zulu-agent"`);
   const [isShow, setIsShow] = useState(false);
   const [myForm] = Form.useForm();
-  const { data: tableData, loading, error } = useFetch("k8spodsinfo");
+  const { data: tableData, loading, error } = useFetch("namespaceinfo");
   const [current, setCurrent] = useState(1);
+  // 默认一页展示10条数据
   const [pageSize, setPageSize] = useState(10);
+
+  /**
+   * 分页
+   * @param pageOption
+   */
   const [pageOption, setPageOption] = useState({
-    pageNo: 1,
-    pageSize: 10,
+    pageNo: 1, //分页序号
+    pageSize: 10, //每页显示的条数
   });
 
+  /**
+   * 分页配置
+   */
   const dataSource = { tableData };
   const paginationProps = {
     current: pageOption.pageNo,
@@ -29,20 +48,20 @@ function PodsInfo() {
     total: dataSource.length,
     onChange: (current, size) => paginationChange(current, size),
   };
-
+  /**
+   * 分页改变
+   */
   const paginationChange = async (current, size) => {
     setPageOption({
-      pageNo: current,
-      pageSize: size,
+      pageNo: current, //当前所在页面
+      pageSize: size, //当前所在页面数据数量
     });
   };
-
-  //Deploy yaml - 使用API_BASIC_URL构建URL
   const sendDataToBackend = async (yamlContent) => {
     try {
       console.log("Sending YAML content:", yamlContent);
       // 使用API_BASIC_URL构建完整的URL
-      const url = `${API_BASIC_URL}/deploypod`;
+      const url = `${API_BASIC_URL}/deploynamespace`;
       const response = await axios.post(url, yamlContent, {
         headers: {
           "Content-Type": "application/yaml",
@@ -59,111 +78,54 @@ function PodsInfo() {
     }
   };
 
-  // 统一的提交处理函数
-  const handleSubmit = async () => {
-    try {
-      // 直接使用yamlContent
-      const response = await sendDataToBackend(yamlContent);
-      console.log("Success:", response);
-      message.success("Post Yaml to backend api Successfully!");
-      setIsShow(false);
-      // 清空YAML内容
-      setYamlContent("");
-    } catch (error) {
-      console.error("Error:", error);
-      if (error.response) {
-        message.error(
-          `Failed to post Yaml to backend api: ${
-            error.response.data?.error || "Unknown error"
-          }`
-        );
-      } else {
-        message.error("Failed to post Yaml to backend api: Network error");
-      }
-    }}
-  const handleDelete = async (record) => {
-    Modal.confirm({
-      title: "Confirm Delete!!!",
-      content: `Are you sure you want to delete pod "${record.Name}" in namespace "${record.Namespace}"?`,
-      okText: "YES",
-      cancelText: "NO",
-      onOk: async () => {
-        try {
-          const requestData = {
-            podname: record.Name,
-            namespace: record.Namespace,
-          };
-          console.log("Sending request data:", JSON.stringify(requestData));
-          
-          const response = await axios.post(`${API_BASIC_URL}/deletepod`, requestData, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          message.success("Pod deleted successfully!");
-        } catch (error) {
-          console.error("Delete failed:", error);
-          message.error("Failed to delete pod: " + (error.response?.data?.error || "Unknown error"));
+    const handleSubmit = async () => {
+      try {
+        // 直接使用yamlContent
+        const response = await sendDataToBackend(yamlContent);
+        console.log("Success:", response);
+        message.success("Post Yaml to backend api Successfully!");
+        setIsShow(false);
+        // 清空YAML内容
+        setYamlContent("");
+      } catch (error) {
+        console.error("Error:", error);
+        if (error.response) {
+          message.error(
+            `Failed to post Yaml to backend api: ${
+              error.response.data?.error || "Unknown error"
+            }`
+          );
+        } else {
+          message.error("Failed to post Yaml to backend api: Network error");
         }
-      },
-    });
-  };
-
+      }}
   const columns = [
     {
       title: "Name",
-      dataIndex: "Name",
-      key: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: "Node Name",
-      dataIndex: "NodeName",
-      key: "NodeName",
-    },
-    {
-      title: "Name Space",
-      dataIndex: "Namespace",
-      key: "Namespace",
+      title: "Creation Time",
+      dataIndex: "creation",
+      key: "creation",
     },
     {
       title: "Status",
-      dataIndex: "Status",
-      key: "Status",
-    },
-    {
-      title: "Host IP",
-      dataIndex: "HostIP",
-      key: "HostIP",
-    },
-    {
-      title: "Pod IP",
-      dataIndex: "PodIP",
-      key: "PodIP",
-    },
-    {
-      title: "Start Time",
-      dataIndex: "StartTime",
-      key: "StartTime",
-    },
-    // 补充在列定义后
-    {
-      title: "Actions",
-      key: "actions",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button type="primary" danger onClick={() => handleDelete(record)}>
-            Delete
-          </Button>
-        </Space>
-      ),
+      dataIndex: "status",
+      key: "status",
     },
   ];
-
   return (
     <div>
       <Card
-        style={{ borderColor: "#2d5cf5ff" }}
-        title="Pods Details"
+        style={{
+          borderColor: "#ac48ebff",
+          marginTop: 10,
+          marginRight: 10,
+          overflow: "auto",
+        }}
+        title="NameSpace Details"
         extra={
           <div>
             <Button
@@ -178,26 +140,24 @@ function PodsInfo() {
           </div>
         }
       >
-        <Form form={myForm} style={{ overflow: "auto" }}>
-          <Form.Item label="Pod Name:">
-            <Input placeholder="Pls input pod name:" />
-          </Form.Item>
-        </Form>
         {loading ? (
-          <div>Loading pod data...</div>
+          <div>Loading namespace data...</div>
         ) : error ? (
-          <div>Error loading pod data: {error.message}</div>
-        ) : tableData && tableData.length == 0 ?(<div style={{textAlign: 'center', padding: 20, fontSize: 18, color: 'blue'}}>No data available currently!</div>) : (
+          <div>Error loading namespace data: {error.message}</div>
+        ) : tableData && tableData.length === 0 ? (
+          <div style={{textAlign: 'center', padding: '20px'}}>No data available</div>
+        ) : (
           <Table
             columns={columns}
             dataSource={tableData}
             pagination={paginationProps}
             rowKey={(record) => record.key}
-            rowClassName={() => "custom-row-line-blue"} // 添加行样式类名
+            rowClassName={() => "custom-row-line-purple"}
           />
         )}
+        
       </Card>
-      <Modal
+        <Modal
         title="Add Yaml content:"
         onCancel={() => {
           setIsShow(false);
@@ -252,4 +212,4 @@ function PodsInfo() {
   );
 }
 
-export default PodsInfo
+export default NamespaceInfoModify;

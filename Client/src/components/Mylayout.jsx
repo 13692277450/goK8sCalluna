@@ -144,7 +144,7 @@ const itemsMenuData = [
     label: withTooltip("NAMESPACE MANAGE"),
     children: [
       {
-        key: "/admin/namespaceInfo",
+        key: "/admin/namespaceInfoModify",
         icon: <ProfileOutlined style={{ color: "cyan" }} />,
         label: withTooltip("NAMESPACE INFO"),
       },
