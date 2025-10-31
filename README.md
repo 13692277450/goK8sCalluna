@@ -7,13 +7,17 @@ Now, it can get Pods info and show, resources info, log info, deploy pod..., I w
 
 How to run this application? so easy, 5 steps only: 
 
-1. Setup your K8S cluster system and metrics server, Kafka4.1.0.
-2. copy .kube\kubeconfig to Server\kubernetsServ\kubeconfig.
+1. Setup your K8S cluster system and metrics server0.6.4, Kafka4.1.0.
+2. copy .kube\config to Server\kubernetsServ\kubeconfig.
 3. Modify Server\kubernetsServ\kubeconfig file, chang server: https://192.168.1.211:6443 to your K8s master server if IP address was wrong.
 4. go run . then can run your backend server.
 5. Enter into client folder, modify uitils\useFech.js, modify ip address to your ip address: " API_BASIC_URL = 'http://localhost:8080/api'; //connect to Golang backend api server port. "
 6. Run "npm run dev".
 7. Then you can access K8s manage tool by browser.
+
+2025.10.31 update: Add delete function in pods information page(pls notice for permant delete pod, this code need delete pod's create style including deploy, namespace, cronjob...., the code can identify which create pod type used but be careful if you have other pod in deployment or namespace..., you can modify code you want which one is your prefer chooice.), build function to add namespace function page. will try add kafka function in code at next stage.
+
+<img width="2559" height="1599" alt="image" src="https://github.com/user-attachments/assets/9320dffe-f3a9-470d-a6ae-dd9abf2ef78d" />
 
    
 2025.10.27 update: Add pods running status page and setup auto refresh per 5 minutes.
