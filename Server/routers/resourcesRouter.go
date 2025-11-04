@@ -6,9 +6,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func K8sResourcesInit(r *gin.Engine) {
-	resourcesRouters := r.Group("/")
+func K8sResourcesRoutersInit(r *gin.Engine) {
+	resourcesRouters := r.Group("/api")
 	{
-		resourcesRouters.GET("/resourcesInfo.html", resources.ResourcesController{}.GetResources)
+		resourcesRouters.GET("/resourcesinfo", resources.ResourcesController{}.GetResources)
 	}
 }

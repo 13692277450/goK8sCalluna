@@ -6,9 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func K8sManageCenterInit(r *gin.Engine) {
-	PodsRouters := r.Group("/")
+func K8sManageCenterRoutersInit(r *gin.Engine) {
+	PodsRouters := r.Group("/api")
 	{
-		PodsRouters.GET("/k8spodlist.html", pods.PodsController{}.ResponsePodsListController)
+		PodsRouters.GET("/k8spodsinfo", pods.PodsControllers{}.ResponsePodsListController)
+		PodsRouters.POST("/deletepod", pods.PodsControllers{}.DeletePodController)
 	}
 }

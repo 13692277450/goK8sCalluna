@@ -10,73 +10,8 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// var Kubeconfig *string
-// var Config *rest.Config
-// var Clientset *kubernetes.Clientset
-
-// // embeded: kubeconfig: ./kubeconfig
-// var kubeconfigEmbed embed.FS
-
-// func K8sInit() {
-
-// 	// if home := homedir.HomeDir(); home != "" {
-// 	// 	Kubeconfig = flag.String("Kubeconfig", filepath.Join(home, ".kube", "config"), "./config/Kubeconfig")
-// 	// } else {
-// 	Kubeconfig = flag.String("kubeconfig", "kubeconfig", "")
-// 	// }
-// 	flag.Parse()
-
-// 	fmt.Println("Kubeconfig:", *Kubeconfig)
-
-// 	Config, err := clientcmd.BuildConfigFromFlags("", *Kubeconfig)
-// 	if err != nil {
-// 		fmt.Println("Config errorL: ", err)
-// 		panic(err.Error())
-// 	}
-// 	fmt.Println("config: ", Config)
-
-// 	Config.APIPath = "api"
-// 	Config.GroupVersion = &corev1.SchemeGroupVersion
-// 	Config.NegotiatedSerializer = scheme.Codecs
-
-// 	restClient, err := rest.RESTClientFor(Config)
-// 	if err != nil {
-// 		fmt.Println("restClient error: ", err)
-// 		panic(err.Error())
-// 	}
-// 	// Clientset, err := kubernetes.NewForConfig(config)
-// 	// configInCluster, err := rest.InClusterConfig()
-
-// 	result := &corev1.PodList{}
-
-// 	fmt.Println("result: ===========", result)
-// 	err = restClient.Get().
-// 		Namespace("whalebase").
-// 		Resource("pods").
-// 		VersionedParams(&metav1.ListOptions{Limit: 500}, scheme.ParameterCodec).
-// 		Do(context.TODO()).
-// 		Into(result)
-// 	fmt.Println("result: ", result)
-// 	for _, d := range result.Items {
-// 		fmt.Println("range: error:: ", err)
-
-// 		fmt.Printf("namespace:%v \t name:%v \t status:%+v\n", d.Namespace, d.Name, d.Status.Phase)
-// 	}
-// }
-
 func GetK8sPods() []models.PodInfo {
-	// Kubeconfig = flag.String("kubeconfig", "kubeconfig", "")
-	// Config, err := clientcmd.BuildConfigFromFlags("", *Kubeconfig)
-	// if err != nil {
-	// 	fmt.Println("BuildConfigFromFlags error: ", err)
-	// 	panic(err.Error())
-	// }
-	// Clientset, err := kubernetes.NewForConfig(Config)
-	// if err != nil {
-	// 	fmt.Println("Clientset  error: ", err)
-	// 	log.Fatal(err)
-	// }
-	// 获取 Pod 列表
+
 	pods, err := Clientset.CoreV1().Pods("default").List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		fmt.Println("List Pods error: ", err)
@@ -87,12 +22,18 @@ func GetK8sPods() []models.PodInfo {
 	var PodInfos []models.PodInfo
 	for _, pod := range pods.Items {
 		podInfo := models.PodInfo{
-			Name:      pod.Name,
-			Status:    string(pod.Status.Phase),
-			NodeName:  pod.Spec.NodeName,
-			HostIP:    pod.Status.HostIP,
-			PodIP:     pod.Status.PodIP,
-			StartTime: pod.Status.StartTime.String(),
+			Name:     pod.Name,
+			Status:   string(pod.Status.Phase),
+			NodeName: pod.Spec.NodeName,
+			HostIP:   pod.Status.HostIP,
+			PodIP:    pod.Status.PodIP,
+			StartTime: func() string {
+				if len(pod.Status.StartTime.String()) != 0 {
+					return pod.Status.StartTime.String()
+				} else {
+					return ""
+				}
+			}(),
 			Namespace: pod.Namespace,
 		}
 		PodInfos = append(PodInfos, podInfo)
@@ -101,23 +42,50 @@ func GetK8sPods() []models.PodInfo {
 	}
 	models.SetPods(PodInfos)
 	return PodInfos
-	//ok
-	// var ns, label, field string
-	// flag.StringVar(&ns, "namespace", "", "namespace")
-	// flag.StringVar(&label, "l", "", "Label selector")
-	// flag.StringVar(&field, "f", "", "Field selector")
 
-	// api := Clientset.CoreV1()
-	// // setup list options
-	// listOptions := metav1.ListOptions{
-	// 	LabelSelector: label,
-	// 	FieldSelector: field,
-	// }
-	// pvcs, err := api.PersistentVolumeClaims(ns).List(context.TODO(), listOptions)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Println("Pvc List: ", pvcs)
+}
+
+// GetPodResources 获取指定命名空间中Pod的资源使用情况
+func GetPodResources1(namespace, podName string) {
+	// 从 Kubernetes API 检索 Pod 信息
+	pod, err := Clientset.CoreV1().Pods(namespace).Get(context.TODO(), podName, metav1.GetOptions{})
+	if err != nil {
+		fmt.Printf("Error getting pod: %v\n", err)
+		return
+	}
+
+	// scan all containers
+	for _, container := range pod.Spec.Containers {
+		fmt.Printf("Container: %s\n", container.Name)
+
+		// cpu  limit
+		if container.Resources.Limits != nil {
+			if cpuLimit, exists := container.Resources.Limits["cpu"]; exists {
+				fmt.Printf("  CPU Limit: %s\n", cpuLimit.String())
+			}
+		}
+
+		// cpu request
+		if container.Resources.Requests != nil {
+			if cpuRequest, exists := container.Resources.Requests["cpu"]; exists {
+				fmt.Printf("  CPU Request: %s\n", cpuRequest.String())
+			}
+		}
+
+		// memory limit
+		if container.Resources.Limits != nil {
+			if memLimit, exists := container.Resources.Limits["memory"]; exists {
+				fmt.Printf("  Memory Limit: %s\n", memLimit.String())
+			}
+		}
+
+		// memory request
+		if container.Resources.Requests != nil {
+			if memRequest, exists := container.Resources.Requests["memory"]; exists {
+				fmt.Printf("  Memory Request: %s\n", memRequest.String())
+			}
+		}
+	}
 }
 
 //fmt.Println("Pvcs: ", pvcs)

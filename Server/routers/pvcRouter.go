@@ -1,13 +1,13 @@
 package routers
 
 import (
-	"gok8s/controllers/admin"
+	"gok8s/controllers/admin/pvc"
 
 	"github.com/gin-gonic/gin"
 )
 
-func PVCControllerInit(r *gin.Engine) {
-	pvcRouters := r.Group("/default")
+func PVCRoutersInit(r *gin.Engine) {
+	pvcRouters := r.Group("/api")
 	{
 		// defaultRouters.GET("/", func(c *gin.Context) {
 		// 	c.JSON(200, gin.H{
@@ -15,7 +15,7 @@ func PVCControllerInit(r *gin.Engine) {
 		// 	})
 		// })
 		//loginRouters.GET("/login", (&loginControllers.LoginController{}).Login)
-		pvcRouters.GET("/index", admin.PVCController{}.Home)
+		pvcRouters.GET("/pvcinfo", pvc.PVCControllers{}.PVCController)
 
 	}
 

@@ -1,1 +1,1 @@
-// export const severalUrl = '/api'
+// export const severalUrl = '/api' // Base API URL

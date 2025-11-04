@@ -10,7 +10,13 @@ import (
 	// metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+var NameSpacesTotal []models.NameSpaces
+
+func GetNameSpacesTotal() []models.NameSpaces {
+	return NameSpacesTotal
+}
 func GetNameSpaceList() []models.NameSpaces {
+	NameSpacesTotal = []models.NameSpaces{}
 	// Get namespace list
 	namespaceList, err := Clientset.CoreV1().Namespaces().List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
@@ -18,16 +24,15 @@ func GetNameSpaceList() []models.NameSpaces {
 	}
 
 	// Print namespace info
-	var nameSpaces []models.NameSpaces
 	for _, namespace := range namespaceList.Items {
 		nsp := models.NameSpaces{
 			Name:     namespace.Name,
 			Creation: fmt.Sprintf("%v", namespace.CreationTimestamp),
 			Status:   string(namespace.Status.Phase),
 		}
-		nameSpaces = append(nameSpaces, nsp)
-		models.SetNameSpaces(nameSpaces)
+		NameSpacesTotal = append(NameSpacesTotal, nsp)
+		models.SetNameSpaces(NameSpacesTotal)
 	}
-	fmt.Println("Namespaces: ", nameSpaces)
-	return nameSpaces
+	fmt.Println("Namespaces: ", NameSpacesTotal)
+	return NameSpacesTotal
 }

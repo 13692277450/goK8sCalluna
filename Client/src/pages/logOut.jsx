@@ -39,7 +39,7 @@ function LogOut() {
             onFinish={(n)=>{{
                 console.log('Submit', n);
                 message.info('Login successful')
-                navigate('/admin/employee_type')
+                navigate('/admin/system_status')
             }}}
           >
             <Form.Item

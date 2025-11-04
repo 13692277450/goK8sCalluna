@@ -5,16 +5,14 @@ import MyUpload from "../components/myUpload";
 import axios from "axios";
 // import { get } from "../utils/request";
 import "./pagesCSS.css";
-import { useFetch } from "../utils/useFetch";
-import NodesInfo from "./nodesInfo";
-import NamespaceInfo from "./namespaceInfo";
+import MetricsNodesDashboard from "../metrics/metricsNodes";
 
 function SystemStatus(){
+
   return(
     <>
     <div> 
-      <NamespaceInfo />
-      <NodesInfo />
+      <MetricsNodesDashboard />
     </div>
     </>
   )

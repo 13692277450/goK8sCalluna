@@ -6,8 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NamespaceControllerInit(r *gin.Engine) {
-	SystemRouters := r.Group("/")
+func NamespaceRoutersInit(r *gin.Engine) {
+	SystemRouters := r.Group("/api")
 	{
 		SystemRouters.GET("/namespaceinfo", system.NamspaceController{}.NamespaceController)
 	}

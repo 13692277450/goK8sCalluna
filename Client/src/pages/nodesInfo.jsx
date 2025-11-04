@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Form, Input, Table, Modal, message } from "antd";
+import { Card, Button, Form, Input, Table, Modal, message, Flex,Spin } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import MyUpload from "../components/myUpload";
 import axios from "axios";
@@ -12,7 +12,7 @@ import { useFetch } from "../utils/useFetch";
 function NodesInfo() {
   const [isShow, setIsShow] = useState(false);
   const [myForm] = Form.useForm();
-  const { data: tableData, loading, error } = useFetch("http://localhost:8080/systeminfo");
+  const { data: tableData, loading, error } = useFetch("systeminfo");
   const [current, setCurrent] = useState(1);
   // 默认一页展示10条数据
   const [pageSize, setPageSize] = useState(10);
@@ -108,7 +108,21 @@ const columns=[
           </Form.Item>
         </Form>
         {loading ? (
-          <div>Loading nodes data...</div>
+            <div
+        style={{
+          padding: "20px",
+          //backgroundColor: '#f5f5f5',
+          borderRadius: "4px",
+          color: "#ee8282ff",
+          fontStyle: "italic",
+          fontSize: "16px",
+          textAlign: "center",
+        }}
+      >
+        <Flex align="center" gap="middle">
+        <span><h4>Loading nodes information data, pls wait...  </h4>  <Spin /></span>
+        </Flex>
+      </div>
         ) : error ? (
           <div>Error loading nodes data: {error.message}</div>
         ) : (
@@ -119,6 +133,7 @@ const columns=[
             dataSource={tableData}
             pagination={paginationProps}
             rowKey={record => record.key}
+            rowClassName={()=> 'custom-row-line-purple'}
           />
         )}
 </Card>

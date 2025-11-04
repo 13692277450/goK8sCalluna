@@ -9,8 +9,11 @@ import (
 type PodLogsController struct {
 }
 
+// 在kubernetsServ包中添加
+
 func (pl PodLogsController) PodsLogController(c *gin.Context) {
-	var podsLogInfo = kubernetsServ.GetLogsFromMultiPods("default", "")
+
+	var podsLogInfo = kubernetsServ.GetLogsFromMultiPods(kubernetsServ.NameSpacesTotal, "")
 	c.JSON(200, gin.H{
 		"data":   podsLogInfo,
 		"status": "success",

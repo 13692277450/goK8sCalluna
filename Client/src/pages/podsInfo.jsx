@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Form, Input, Table, Modal, message, Space } from "antd";
+import { Card, Button, Form, Input, Table, Modal, message, Space, Flex, Spin  } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import MyUpload from "../components/myUpload";
 import axios from "axios";
 import "./pagesCSS.css";
 import { useFetch } from "../utils/useFetch";
 
+// 从useFetch导入API_BASIC_URL
+import { API_BASIC_URL } from "../utils/useFetch";
+
 function PodsInfo() {
   const { TextArea } = Input;
   const [yamlContent, setYamlContent] = useState("");
   const [isShow, setIsShow] = useState(false);
   const [myForm] = Form.useForm();
-  const {
-    data: tableData,
-    loading,
-    error,
-  } = useFetch("http://localhost:8080/k8spodlist.html");
+  const { data: tableData, loading, error } = useFetch("k8spodsinfo");
   const [current, setCurrent] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-
   const [pageOption, setPageOption] = useState({
     pageNo: 1,
     pageSize: 10,
@@ -39,19 +37,17 @@ function PodsInfo() {
     });
   };
 
-  //Deploy yaml
+  //Deploy yaml - 使用API_BASIC_URL构建URL
   const sendDataToBackend = async (yamlContent) => {
     try {
       console.log("Sending YAML content:", yamlContent);
-      const response = await axios.post(
-        "http://localhost:8080/api/deploypod",
-        yamlContent,
-        {
-          headers: {
-            "Content-Type": "application/yaml",
-          },
-        }
-      );
+      // 使用API_BASIC_URL构建完整的URL
+      const url = `${API_BASIC_URL}/deploypod`;
+      const response = await axios.post(url, yamlContent, {
+        headers: {
+          "Content-Type": "application/yaml",
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error sending yaml:", error);
@@ -85,6 +81,40 @@ function PodsInfo() {
         message.error("Failed to post Yaml to backend api: Network error");
       }
     }
+  };
+  const handleDelete = async (record) => {
+    Modal.confirm({
+      title: "Confirm Delete!!!",
+      content: `Are you sure you want to delete pod "${record.Name}" in namespace "${record.Namespace}"?`,
+      okText: "YES",
+      cancelText: "NO",
+      onOk: async () => {
+        try {
+          const requestData = {
+            podname: record.Name,
+            namespace: record.Namespace,
+          };
+          console.log("Sending request data:", JSON.stringify(requestData));
+
+          const response = await axios.post(
+            `${API_BASIC_URL}/deletepod`,
+            requestData,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          message.success("Pod deleted successfully!");
+        } catch (error) {
+          console.error("Delete failed:", error);
+          message.error(
+            "Failed to delete pod: " +
+              (error.response?.data?.error || "Unknown error")
+          );
+        }
+      },
+    });
   };
 
   const columns = [
@@ -123,12 +153,24 @@ function PodsInfo() {
       dataIndex: "StartTime",
       key: "StartTime",
     },
+    // 补充在列定义后
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_, record) => (
+        <Space size="middle">
+          <Button type="primary" danger onClick={() => handleDelete(record)}>
+            Delete
+          </Button>
+        </Space>
+      ),
+    },
   ];
 
   return (
     <div>
       <Card
-        style={{ borderColor: "#ac48ebff" }}
+        style={{ borderColor: "#2d5cf5ff" }}
         title="Pods Details"
         extra={
           <div>
@@ -150,15 +192,41 @@ function PodsInfo() {
           </Form.Item>
         </Form>
         {loading ? (
-          <div>Loading pod data...</div>
+           <div
+        style={{
+          padding: "20px",
+          //backgroundColor: '#f5f5f5',
+          borderRadius: "4px",
+          color: "#ee8282ff",
+          fontStyle: "italic",
+          fontSize: "16px",
+          textAlign: "center",
+        }}
+      >
+        <Flex align="center" gap="middle">
+        <span><h4>Loading Pods Information data, pls wait...  </h4>  <Spin /></span>
+        </Flex>
+      </div>
         ) : error ? (
           <div>Error loading pod data: {error.message}</div>
+        ) : tableData && tableData.length == 0 ? (
+          <div
+            style={{
+              textAlign: "center",
+              padding: 20,
+              fontSize: 18,
+              color: "blue",
+            }}
+          >
+            No data available currently!
+          </div>
         ) : (
           <Table
             columns={columns}
             dataSource={tableData}
             pagination={paginationProps}
             rowKey={(record) => record.key}
+            rowClassName={() => "custom-row-line-blue"} // 添加行样式类名
           />
         )}
       </Card>
@@ -193,16 +261,20 @@ function PodsInfo() {
                 onChange={(e) => setYamlContent(e.target.value)}
                 maxLength={100000}
               />
-              <div style={{ marginTop: 16 }} >
+              <div style={{ marginTop: 16 }}>
                 <MyUpload onFileContentChange={setYamlContent} />
                 <span></span>
-                <div style={{float: "right", display: "inline-block"}}>
-                <Button key="cancel" onClick={() => setIsShow(false)} style={{marginRight: 20}}>
-                  CANCEL
-                </Button>
-                <Button key="submit" type="primary" onClick={handleSubmit}>
-                  SEND YAML
-                </Button>
+                <div style={{ float: "right", display: "inline-block" }}>
+                  <Button
+                    key="cancel"
+                    onClick={() => setIsShow(false)}
+                    style={{ marginRight: 20 }}
+                  >
+                    CANCEL
+                  </Button>
+                  <Button key="submit" type="primary" onClick={handleSubmit}>
+                    SEND YAML
+                  </Button>
                 </div>
               </div>
             </div>

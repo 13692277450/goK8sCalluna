@@ -4,43 +4,26 @@ import (
 	"context"
 	"fmt"
 	"gok8s/models"
+	"strings"
 
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
 )
 
 var PVCList []models.PVCInfo
 
-type PVCController struct {
-	clientSet *kubernetes.Clientset
-}
+// var pvcController PVCController
+var Ctx = context.Background()
+var Namespace = "default"
 
-func PvcInit() (*PVCController, error) {
-	config, err := clientcmd.BuildConfigFromFlags("", "kubeconfig")
-	if err != nil {
-		return nil, fmt.Errorf("failed to build kubeconfig: %v", err)
-	}
+func GetPVCList(namespace string) ([]models.PVCInfo, error) {
 
-	clientset, err := kubernetes.NewForConfig(config)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create clientset: %v", err)
-	}
-
-	return &PVCController{
-		clientSet: clientset,
-	}, nil
-}
-
-func (c *PVCController) GetPVCList(ctx context.Context, namespace string) ([]models.PVCInfo, error) {
-
-	pvcs, err := c.clientSet.CoreV1().PersistentVolumeClaims(namespace).List(ctx, metav1.ListOptions{})
+	pvcs, err := Clientset.CoreV1().PersistentVolumeClaims(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to get PVC list: %v", err)
 	}
 
-	PVCList = []models.PVCInfo{} // 清空之前的列表
+	PVCList = []models.PVCInfo{} // clean
 	for _, pvc := range pvcs.Items {
 		PVCList = append(PVCList, models.PVCInfo{
 			Name:      pvc.Name,
@@ -58,14 +41,18 @@ func (c *PVCController) GetPVCList(ctx context.Context, namespace string) ([]mod
 				}
 				return ""
 			}(),
-			AccessModes:  convertAccessModes(pvc.Spec.AccessModes),
-			VolumeName:   pvc.Spec.VolumeName,
+			AccessModes: convertAccessModes(pvc.Spec.AccessModes),
+			// ResourceVersion: pvc.ResourceVersion,
+			// APIVersion:      pvc.APIVersion,
+			// GenerateName:    pvc.GenerateName,
+			// Labels:          convertLabelsToString(pvc.Labels),
+			UID: string(pvc.UID),
+			// Annotations:     convertAnnotationsToString(pvc.Annotations),
+			// OwnerReferences: convertOwnerReferencesToString(pvc.OwnerReferences),
+			// Finalizers:      convertFinalizersToString(pvc.Finalizers),
+			// Selector:        convertLabelSelectorToString(pvc.Spec.Selector), // 添加Selector字段
 			CreationTime: pvc.CreationTimestamp.String(),
 		})
-	}
-	fmt.Println("PVCList##############:", PVCList)
-	for i := range PVCList {
-		fmt.Println("PVCList[i]##############:", PVCList[i])
 	}
 	// 将获取的PVC数据设置到模型中
 	models.SetPVC(PVCList)
@@ -81,28 +68,63 @@ func convertAccessModes(modes []v1.PersistentVolumeAccessMode) []string {
 }
 
 // GetPVCList 包级别函数，获取默认命名空间的PVC列表
-func GetPVCList() {
-	ctx := context.Background()
-	namespace := "default"
+//func GetPVCList() {
+// ctx := context.Background()
+// namespace := "default"
 
-	pvcController, err := PvcInit()
-	if err != nil {
-		fmt.Printf("Failed to initialize PVC controller: %v\n", err)
-		return
+// 添加类型转换辅助函数
+func convertLabelsToString(labels map[string]string) string {
+	if labels == nil {
+		return ""
 	}
-	if pvcController == nil {
-		fmt.Println("PVC controller is nil")
-		return
+	var labelStrings []string
+	for k, v := range labels {
+		labelStrings = append(labelStrings, fmt.Sprintf("%s=%s", k, v))
 	}
+	return strings.Join(labelStrings, ",")
+}
 
-	pvcs, err := pvcController.GetPVCList(ctx, namespace)
-	if err != nil {
-		fmt.Printf("Failed to get PVC list: %v\n", err)
-		return
+func convertAnnotationsToString(annotations map[string]string) string {
+	if annotations == nil {
+		return ""
 	}
+	var annoStrings []string
+	for k, v := range annotations {
+		annoStrings = append(annoStrings, fmt.Sprintf("%s=%s", k, v))
+	}
+	return strings.Join(annoStrings, ",")
+}
 
-	fmt.Printf("Found %d PVCs in namespace %s:\n", len(pvcs), namespace)
-	for _, pvc := range pvcs {
-		fmt.Printf("- %s (Status: %s, StorageClass: %s)\n", pvc.Name, pvc.Status, pvc.StorageClass)
+func convertOwnerReferencesToString(ownerRefs []metav1.OwnerReference) string {
+	if ownerRefs == nil {
+		return ""
 	}
+	var ownerStrings []string
+	for _, owner := range ownerRefs {
+		ownerStrings = append(ownerStrings, fmt.Sprintf("%s/%s", owner.Kind, owner.Name))
+	}
+	return strings.Join(ownerStrings, ",")
+}
+
+func convertFinalizersToString(finalizers []string) string {
+	if finalizers == nil {
+		return ""
+	}
+	return strings.Join(finalizers, ",")
+}
+
+func convertLabelSelectorToString(selector *metav1.LabelSelector) string {
+	if selector == nil {
+		return ""
+	}
+	// 处理MatchLabels
+	if selector.MatchLabels != nil {
+		var labelStrings []string
+		for k, v := range selector.MatchLabels {
+			labelStrings = append(labelStrings, fmt.Sprintf("%s=%s", k, v))
+		}
+		return strings.Join(labelStrings, ",")
+	}
+	// 未来可以添加对MatchExpressions的处理
+	return ""
 }

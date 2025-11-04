@@ -11,6 +11,8 @@ func ApiRoutersInit(r *gin.Engine) {
 	{
 		apiRouters.GET("/", admin.ApiResponse{}.Default)
 		apiRouters.GET("/apiDetails", admin.ApiResponse{}.Details)
+		// Add DELETE /api/deletepod route
+		//apiRouters.DELETE("/deletepod", pods.DecodeDeletePodController)
 	}
 
 }
