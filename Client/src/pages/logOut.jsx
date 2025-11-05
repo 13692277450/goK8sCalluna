@@ -46,7 +46,7 @@ function LogOut() {
               label="Username"
               name="username"
               rules={[
-                { required: true, message: "Please input your username!" },
+                { required: true, message: "Please input your username(anything)!" },
               ]}
             >
               <Input placeholder="username" />
@@ -55,7 +55,7 @@ function LogOut() {
               label="Password"
               name="password"
               rules={[
-                { required: true, message: "Please input your password!" },
+                { required: true, message: "Please input your password(anything)!" },
               ]}
             >
               <Input.Password placeholder="password" />
