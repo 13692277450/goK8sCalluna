@@ -28,11 +28,10 @@ func GetK8sPods() []models.PodInfo {
 			HostIP:   pod.Status.HostIP,
 			PodIP:    pod.Status.PodIP,
 			StartTime: func() string {
-				if len(pod.Status.StartTime.String()) != 0 {
-					return pod.Status.StartTime.String()
-				} else {
-					return ""
+				if pod.Status.StartTime == nil || pod.Status.StartTime.IsZero() {
+					return "1970-01-01 08:00:00 +0800 CST"
 				}
+				return pod.Status.StartTime.String()
 			}(),
 			Namespace: pod.Namespace,
 		}

@@ -39,15 +39,15 @@ func main() {
 	if kubernetsServ.Clientset == nil {
 		log.Fatal("Kubernetes client initialization failed")
 	}
-	// Get K8s Pods
-	kubernetsServ.GetK8sPods()
-	// Get K8s resources
-	kubernetsServ.GetK8sResources()
+	
 	// Get PVCs
 	kubernetsServ.GetPVCList(kubernetsServ.Namespace)
-	//kubernetsServ.Deployment()
-	//go kubernetsServ.Deployment()
-
+	
+	// Get K8s resources
+	kubernetsServ.GetK8sResources()
+	
+	// Get K8s Pods
+	kubernetsServ.GetK8sPods()
 	r := gin.Default()
 	// 增强的CORS中间件
 	r.Use(func(c *gin.Context) {
