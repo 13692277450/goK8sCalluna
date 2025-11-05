@@ -1,0 +1,33 @@
+{{ define "k8spodlist.html" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/ming.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <div>
+        <div class="pod-cards">
+            {{ range $pod := .Podlist }}
+            <div class="pod-card">
+                <h3 style="color: blueviolet;">{{ $pod.Name }}</h3>
+                <p><strong>Namespace:</strong> {{ $pod.Namespace }}</p>
+                <p><strong>Status:</strong> {{ $pod.Status }}</p>
+                <p><strong>Node:</strong> {{ $pod.NodeName }}</p>
+                <p><strong>Pod IP:</strong> Pod {{ $pod.PodIP }},
+                <p><strong>Host IP:</strong> Pod {{ $pod.HostIP }},
+                <p><strong>Start Time:</strong> {{ $pod.StartTime }}</p>
+            </div>
+            {{ end }}
+        </div>
+
+        <p>Welcome to the home page!</p>
+    </div>
+</body>
+
+</html>
+{{ end }}
