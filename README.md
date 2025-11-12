@@ -9,8 +9,8 @@ K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Docke
 <span style="color: #843fa1;">**How to run this application? so easy, 5 steps only:**</span>
 
 1\. Setup your K8S cluster system and metrics server0.8.0, Kafka4.1.0.  
-2\. enter into server folder, copy .kube\\config to Server\\kubeconfig.  
-3\. Modify Server\\kubeconfig file, chang server: https://192.168.1.211:6443 to your K8s master server if need.  
+2\. enter into server folder, copy your K8s server config from /roo/.kube/config to Golang code Server\kubeconfig.  
+3\. Modify Server\\kubeconfig file, chang server: https://192.168.1.xxx:6443 to your K8s master server if need.  
 4\. go run . then can run your backend server.  
 5\. Enter into client folder, modify uitils\\useFech.js, modify ip address to your ip address: " API_BASIC_URL = 'http://localhost:8080/api'; //connect to Golang backend api server port. "  
 6\. Run npm i then run  "npm run dev".  
