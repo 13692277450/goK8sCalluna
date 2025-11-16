@@ -108,6 +108,11 @@ const itemsMenuData = [
     label: withTooltip("INFO CENTER"),
     children: [
       {
+        key: "/admin/services_info",
+        icon: <ReadOutlined style={{ color: "lightgreen" }} />,
+        label: withTooltip("SERVICES INFO"),
+      },
+      {
         key: "/admin/podsInfo",
         icon: <ReadOutlined style={{ color: "lightgreen" }} />,
         label: withTooltip("PODS INFO"),
@@ -182,12 +187,12 @@ const itemsMenuData = [
 
     children: [
         {
-        key: "/admin/prometheus",
+        key: "/admin/system_prometheus",
         icon: <ContainerOutlined style={{ color: "lightgreen" }} />,
         label: withTooltip("PROMETHEUS"),
       },
         {
-        key: "/admin/grafana",
+        key: "/admin/system_grafana",
         icon: <ContainerOutlined style={{ color: "lightgreen" }} />,
         label: withTooltip("GRAFANA"),
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Form, Input, Table, Modal, message } from "antd";
 // import { get } from "../utils/request";
-import "./pagesCSS.css";
+import "../css/pagesCSS.css";
 
 import MetricsPodsDashboard from "../metrics/metricsPods";
 

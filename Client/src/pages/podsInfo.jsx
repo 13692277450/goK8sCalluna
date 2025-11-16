@@ -3,7 +3,7 @@ import { Card, Button, Form, Input, Table, Modal, message, Space, Flex, Spin  } 
 import { PlusOutlined } from "@ant-design/icons";
 import MyUpload from "../components/myUpload";
 import axios from "axios";
-import "./pagesCSS.css";
+import "../css/pagesCSS.css";
 import { useFetch } from "../utils/useFetch";
 
 // 从useFetch导入API_BASIC_URL

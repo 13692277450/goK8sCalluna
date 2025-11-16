@@ -65,7 +65,8 @@ const renderLogCards = (logs) => {
     logEntries.forEach(entry => {
       if (entry.podName && entry.logs) {
         cards.push({
-          title: `Pod: ${entry.podName}`,
+          title:         <div style={{color: 'yellow'}}>Pod: </div> + `${entry.podName}`,
+ //`Pod: ${entry.podName}`,
           content: entry.logs
         });
       }

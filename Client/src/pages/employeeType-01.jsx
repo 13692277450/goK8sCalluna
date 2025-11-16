@@ -4,7 +4,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import MyUpload from "../components/myUpload";
 import axios from "axios";
 import { get } from "../utils/request";
-import "./pagesCSS.css";
+import "../css/pagesCSS.css";
 
 function EmployeeType1() {
   const [isShow, setIsShow] = useState(false);

@@ -19,6 +19,7 @@ import NamespaceInfoModify from "./pages/namespaceInfoModify";
 import SystemTools from "./system/systemTools";
 import Prometheus from "./integradeTools/prometheus";
 import Grafana from "./integradeTools/grafana";
+import ServicesInfo from "./services/servicesInfo";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="namespaceInfoModify" element={<NamespaceInfoModify />} />
           <Route path="system_prometheus" element={<Prometheus />} />
           <Route path="system_grafana" element={<Grafana />} />
+          <Route path="services_info" element={<ServicesInfo />} />
 
         </Routes>
       </Mylayout>   

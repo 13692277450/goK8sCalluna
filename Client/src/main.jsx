@@ -12,7 +12,7 @@ createRoot(document.getElementById("root")).render(
   <Router>
     <ConfigProvider locale={zhCN}>
       <Routes>
-        <Route path="/" element={<LogOut />} />
+        <Route path="/" element={<App />} />
         <Route path="/admin/*" element={<App />} />
       </Routes>
     </ConfigProvider>

@@ -106,10 +106,10 @@ const MetricsPodsDashboard = () => {
           textAlign: "center",
         }}
       >
-        
-        
         <Flex align="center" gap="middle">
-        <span><h4>Loading pods metrics data, pls wait...  </h4>  <Spin /></span>
+          <span>
+            <h4>Loading pods metrics data, pls wait... </h4> <Spin />
+          </span>
         </Flex>
       </div>
     </div>
@@ -161,7 +161,7 @@ const MetricsPodsDashboard = () => {
           marginBottom: "5px",
           width: "100%",
           minWidth: "300px",
-          maxWidth: "300px",
+          maxWidth: "500px",
           minHeight: "320px",
           maxHeight: "320px",
         }}
@@ -195,11 +195,10 @@ const MetricsPodsDashboard = () => {
             }}
           >
             <span>CPU USAGE</span>
-            <div
+            <div className=".cardcontainer"
               style={{
                 color: "blue",
                 fontSize: "16px",
-
                 position: "relative",
                 width: "100%",
                 maxWidth: "100px",
