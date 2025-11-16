@@ -19,6 +19,7 @@ The username and password to access Prometheus and Grafana: username: admin, pas
 
 <span style="color: #3598db;">**or DON'T install K8s server, enter into server folder, run go mod tidy then go run . , the backend server wiil start. then enter into client folder, run npm i then run npm run dev, you can access client UI by browser now.**</span>
 
+*2025.11.16, update: Add service information page.
 *2025.11.09, update: Add Prometheus and Grafana monitor dashboard on Kubernets servre and put them to K8s Manage Tool UI.
 
 <span style="color: #e67e23;">*2025.11.04, update: share my VPS K8s cluster for this project, just run server and client is enough to trial run, no necessary install K8s cluster, fixed bugs.*</span>
@@ -26,6 +27,10 @@ The username and password to access Prometheus and Grafana: username: admin, pas
 *2025.11.05 update: Setup client and compile server backend as linux code and put on vps, pls access http://104.168.125.34/ for demo.
 
 *2025.10.31 update: Add delete function in pods information page(pls notice for permant delete pod, this code need delete pod's create style including deploy, namespace, cronjob...., the code can identify which create pod type used but be careful if you have other pod in deployment or namespace..., you can modify code you want which one is your prefer chooice.), build function to add namespace function page. will try add kafka function in code at next stage.*
+
+
+<img width="2559" height="1524" alt="image" src="https://github.com/user-attachments/assets/a7a1173a-e7dc-4282-91e6-9a1f61d8a593" />
+
 
 
 <img width="2552" height="1281" alt="image" src="https://github.com/user-attachments/assets/f891839c-06c8-4761-a565-d9e60ef9d15b" />
