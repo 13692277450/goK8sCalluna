@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"gok8s/config"
 	"gok8s/models"
 	"io"
 	"strings"
@@ -43,6 +44,7 @@ func GetLogsFromMultiPods(NameSpacesTotal []models.NameSpaces, LabelSelector str
 	if err != nil {
 		return fmt.Sprintf(`{"error": "Failed to marshal logs: %v"}`, err)
 	}
+	config.Lg.Infof("Get Pods Logs succeeded")
 	return string(logData)
 }
 

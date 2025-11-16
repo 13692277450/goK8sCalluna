@@ -13,7 +13,7 @@ import (
 var PVCList []models.PVCInfo
 
 // var pvcController PVCController
-var Ctx = context.Background()
+// var Ctx = context.Background()
 var Namespace = "default"
 
 func GetPVCList(namespace string) ([]models.PVCInfo, error) {
@@ -41,7 +41,7 @@ func GetPVCList(namespace string) ([]models.PVCInfo, error) {
 				}
 				return ""
 			}(),
-			AccessModes: convertAccessModes(pvc.Spec.AccessModes),
+			//AccessModes: convertAccessModes(pvc.Spec.AccessModes),
 			// ResourceVersion: pvc.ResourceVersion,
 			// APIVersion:      pvc.APIVersion,
 			// GenerateName:    pvc.GenerateName,

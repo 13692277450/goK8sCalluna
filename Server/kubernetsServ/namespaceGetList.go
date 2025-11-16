@@ -3,6 +3,7 @@ package kubernetsServ
 import (
 	"context"
 	"fmt"
+	"gok8s/config"
 	"gok8s/models"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -33,6 +34,7 @@ func GetNameSpaceList() []models.NameSpaces {
 		NameSpacesTotal = append(NameSpacesTotal, nsp)
 		models.SetNameSpaces(NameSpacesTotal)
 	}
-	fmt.Println("Namespaces: ", NameSpacesTotal)
+	config.Lg.Infof("Get NameSpaces succeeded")
+
 	return NameSpacesTotal
 }

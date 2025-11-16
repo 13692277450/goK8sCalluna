@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubernetes-dashboard-api
+  namespace: kubernetes-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: api
+      app.kubernetes.io/instance: kubernetes-dashboard
+      app.kubernetes.io/name: kubernetes-dashboard-api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: api
+        app.kubernetes.io/instance: kubernetes-dashboard
+        app.kubernetes.io/name: kubernetes-dashboard-api
+    spec:
+      tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
+      containers:
+      - name: kubernetes-dashboard-api
+        image: docker.io/kubernetesui/dashboard-api:1.14.0
+        ports:
+        - containerPort: 8000
+          name: api
+        args:
+        - --namespace=kubernetes-dashboard
+        - --metrics-scraper-service-name=kubernetes-dashboard-metrics-scraper
+        resources:
+          limits:
+            cpu: 250m
+            memory: 400Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        env:
+        - name: CSRF_KEY
+          valueFrom:
+            secretKeyRef:
+              name: kubernetes-dashboard-csrf
+              key: private.key
+        - name: GOMAXPROCS
+          value: "1"
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.memory
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+        - name: kube-api-access-t22r7
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          readOnly: true
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
+      - name: kube-api-access-t22r7
+        projected:
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+              - key: ca.crt
+                path: ca.crt
+          - downwardAPI:
+              items:
+              - path: namespace
+                fieldRef:
+                  fieldPath: metadata.namespace

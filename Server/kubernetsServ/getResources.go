@@ -1,6 +1,7 @@
 package kubernetsServ
 
 import (
+	"gok8s/config"
 	"gok8s/models"
 	"strconv"
 	"strings"
@@ -55,13 +56,13 @@ func GetK8sResources() []models.ResourcesInfo {
 					if len(Resource.Categories) > 0 {
 						return strings.Join(Resource.Categories, ",")
 					}
-					return ""
+					return "None"
 				}(),
 				ShortNames: func() string {
 					if len(Resource.ShortNames) > 0 {
 						return strings.Join(Resource.ShortNames, ",")
 					}
-					return ""
+					return "None"
 				}(),
 				Verbs:         strings.Join(Resource.Verbs, ","),
 				DeepCopyGroup: Resource.DeepCopy().Group,
@@ -77,5 +78,6 @@ func GetK8sResources() []models.ResourcesInfo {
 
 	// 更新资源信息到模型
 	models.SetResources(resourcesInfos)
+	config.Lg.Infof("Get Resources succeeded")
 	return resourcesInfos
 }

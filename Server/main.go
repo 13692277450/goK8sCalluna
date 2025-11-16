@@ -14,14 +14,13 @@ HomePage: www.pavogroup.top , github.com/13692277450
 package main
 
 import (
-	loginControllers "gok8s/controllers/login"
+	"embed"
+	"gok8s/config"
 	"gok8s/kubernetsServ"
 	"gok8s/models"
 	"gok8s/routers"
-	"gok8s/utils"
-	"log"
-	"net/http"
 	"text/template"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -31,21 +30,33 @@ import (
 //		c.Abort() // 中断请求，不再执行后续的中间件或处理函数,直接向下执行
 //		log.Println("中间件执行完成")
 //	}
+//
+// go: embed: ./templates/**/*
+var templateFiles embed.FS
 
 func main() {
-	go loginControllers.InitDB()
+	// 读取模板文件
+	// data, err := fs.ReadFile(templateFiles, "templates/example.html")
+	// if err != nil {
+	// 	// 处理错误
+	// }
+	config.LogrusConfigInit()
+	time.Sleep(400 * time.Millisecond)
+	config.Lg.Info("GoK8s backend server started... ")
+
+	//go loginControllers.InitDB()
 	//go config.InitDB()
 	kubernetsServ.K8sConnectionInit()
 	if kubernetsServ.Clientset == nil {
-		log.Fatal("Kubernetes client initialization failed")
+		config.Lg.Info("Kubernetes client initialization failed")
 	}
-	
+
 	// Get PVCs
 	kubernetsServ.GetPVCList(kubernetsServ.Namespace)
-	
+
 	// Get K8s resources
 	kubernetsServ.GetK8sResources()
-	
+
 	// Get K8s Pods
 	kubernetsServ.GetK8sPods()
 	r := gin.Default()
@@ -68,9 +79,9 @@ func main() {
 	r.SetFuncMap(template.FuncMap{
 		"UnixToTime": models.UnixToTime,
 	})
-	r.LoadHTMLGlob("templates/**/*")
-	r.Static("/static", "./static")
-	r.StaticFS("/website", http.Dir("./website"))
+	// r.LoadHTMLGlob("templates/**/*")
+	// r.Static("/static", "./static")
+	// r.StaticFS("/website", http.Dir("./website"))
 	// Initialize routers
 	routers.DeployYamlRoutersInit(r)
 	routers.AdminRoutersInit(r)
@@ -83,6 +94,7 @@ func main() {
 	routers.NamespaceRoutersInit(r)
 	routers.PVCRoutersInit(r)
 	routers.MetricsRoutersInit(r)
+	routers.ServicesRoutersInit(r)
 
 	// Check routers registration
 	// routes := r.Routes()
@@ -94,14 +106,14 @@ func main() {
 	// }
 
 	//
-	loginController := loginControllers.LoginController{}
+	// loginController := loginControllers.LoginController{}
 	//utils.GetNodeLogs("k8s-master01")
-	utils.CaptureNodeExecOutput1(false, "./kubernetsServ/kubeconfig", "k8s-master01", []string{"ls"}) //, " get", " pods"})
+	//utils.CaptureNodeExecOutput1(false, "./kubernetsServ/kubeconfig", "k8s-master01", []string{"ls"}) //, " get", " pods"})
 	//utils.GetNodeLogs("k8s-master01")
 
 	// GET and POST
-	r.GET("/login", loginController.ShowLoginPage)
-	r.POST("/login", loginController.Login)
+	// r.GET("/login", loginController.ShowLoginPage)
+	// r.POST("/login", loginController.Login)
 	//kubernetsServ.GetPodResources("default", "mysqlwordpress")
 	// go services.K8sNodesPerformance()
 	// go services.K8sPodsPerformance()

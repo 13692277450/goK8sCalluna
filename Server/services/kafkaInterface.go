@@ -84,7 +84,6 @@ func WriterKafka(ctx context.Context) {
 // 		); err != nil {
 // 			if err == kafka.LeaderNotAvailable {
 // 				fmt.Printf("Leader not available: %v\n", err)
-// 				time.Sleep(time.Second * 2)
 // 				continue
 // 			} else {
 // 				fmt.Printf("Error writing to Kafka: %v\n", err)

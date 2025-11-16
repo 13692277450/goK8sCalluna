@@ -280,7 +280,6 @@ func CaptureNodeExecOutput1(useInCluster bool, kubeconfigPath string, nodeName s
 	if err != nil {
 		return "", "", fmt.Errorf("failed to create executor: %v", err)
 	}
-	fmt.Println("done1111111111.....................")
 
 	// 启动goroutine读取输出
 	var stdoutBuf, stderrBuf bytes.Buffer
@@ -298,7 +297,6 @@ func CaptureNodeExecOutput1(useInCluster bool, kubeconfigPath string, nodeName s
 		defer wg.Done()
 		_, stderrErr = io.Copy(&stderrBuf, stderrReader)
 	}()
-	fmt.Println("done.22222222222222....................")
 
 	// 执行命令
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
@@ -311,7 +309,6 @@ func CaptureNodeExecOutput1(useInCluster bool, kubeconfigPath string, nodeName s
 		Tty:    false,
 	})
 	fmt.Printf("执行器返回，错误: %v\n", err)
-	fmt.Println("done.333333333....................")
 
 	// 关闭管道
 	fmt.Println("关闭stdout管道...")
@@ -321,7 +318,6 @@ func CaptureNodeExecOutput1(useInCluster bool, kubeconfigPath string, nodeName s
 	fmt.Println("等待goroutine完成...")
 	wg.Wait()
 	fmt.Printf("goroutine完成，stdout错误: %v, stderr错误: %v\n", stdoutErr, stderrErr)
-	fmt.Println("done.444444444444444....................")
 
 	if err != nil {
 		// 更详细的错误处理
@@ -374,6 +370,5 @@ func CaptureNodeExecOutput1(useInCluster bool, kubeconfigPath string, nodeName s
 	}
 
 	fmt.Printf("命令执行成功，stdout: %d字节, stderr: %d字节\n", stdoutBuf.Len(), stderrBuf.Len())
-	fmt.Println("done8888888888888.....................")
 	return stdoutBuf.String(), stderrBuf.String(), nil
 }

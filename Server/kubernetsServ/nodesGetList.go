@@ -2,6 +2,7 @@ package kubernetsServ
 
 import (
 	"context"
+	"gok8s/config"
 	"gok8s/models"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -35,5 +36,6 @@ func GetNodesInfo() []models.NodesInfo { //[]models.ClusterInfo
 		models.SetNodes(nodesInfos)
 		// fmt.Println(nodesInfo)
 	}
+	config.Lg.Infof("Get Nodes succeeded")
 	return nodesInfos
 }

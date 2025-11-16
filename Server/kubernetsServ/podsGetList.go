@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	"gok8s/config"
 	"gok8s/models"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -40,6 +41,7 @@ func GetK8sPods() []models.PodInfo {
 		// 	pod.Name, pod.Status.Phase, pod.Spec.NodeName, pod.Status.HostIP, pod.Status.PodIP, pod.Status.StartTime, pod.Namespace)
 	}
 	models.SetPods(PodInfos)
+	config.Lg.Infof("Get Pods succeeded")
 	return PodInfos
 
 }

@@ -4,6 +4,7 @@ import (
 	"embed"
 	"flag"
 	"fmt"
+	"gok8s/config"
 	"log"
 
 	"k8s.io/client-go/kubernetes"
@@ -36,6 +37,7 @@ func K8sConnectionInit() {
 	Config, err = clientcmd.BuildConfigFromFlags("", *Kubeconfig)
 	if err != nil {
 		fmt.Printf("Failed to load main configuration: %v\n", err)
+		config.Lg.Infof("Failed to load main configuration: %v\n", err)
 		panic(err.Error())
 	}
 
@@ -46,8 +48,10 @@ func K8sConnectionInit() {
 	Clientset, err = kubernetes.NewForConfig(Config)
 	if err != nil {
 		fmt.Printf("Failed to create Clientset: %v\n", err)
+		config.Lg.Infof("Failed to create Clientset: %v\n", err)
 		log.Fatal(err)
 	}
+	config.Lg.Infof("Kubernetes client initialization succeeded")
 }
 
 // func K8sInit() {
