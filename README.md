@@ -20,6 +20,7 @@ The username and password to access Prometheus and Grafana: username: admin, pas
 <span style="color: #3598db;">**or DON'T install K8s server, enter into server folder, run go mod tidy then go run . , the backend server wiil start. then enter into client folder, run npm i then run npm run dev, you can access client UI by browser now.**</span>
 
 *2025.11.16, update: Add service information page.
+
 *2025.11.09, update: Add Prometheus and Grafana monitor dashboard on Kubernets servre and put them to K8s Manage Tool UI.
 
 <span style="color: #e67e23;">*2025.11.04, update: share my VPS K8s cluster for this project, just run server and client is enough to trial run, no necessary install K8s cluster, fixed bugs.*</span>
