@@ -4,7 +4,7 @@ import axios from "axios";
 // 公共API基础URL - 导出为模块变量
 export const API_BASIC_URL = 'http://104.168.125.34:8080/api'; //connect to Golang backend api server port.
 //104.168.125.34
-//http://localhost:8080/api
+//export const API_BASIC_URL = 'http://localhost:8080/api'
 export const useFetch = (endpoint) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);

@@ -20,6 +20,8 @@ import SystemTools from "./system/systemTools";
 import Prometheus from "./integradeTools/prometheus";
 import Grafana from "./integradeTools/grafana";
 import ServicesInfo from "./services/servicesInfo";
+import NetworkInfo from "./system/networkInfo";
+
 
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
           <Route path="system_prometheus" element={<Prometheus />} />
           <Route path="system_grafana" element={<Grafana />} />
           <Route path="services_info" element={<ServicesInfo />} />
+          <Route path="network_status" element={<NetworkInfo />} />
+
 
         </Routes>
       </Mylayout>   

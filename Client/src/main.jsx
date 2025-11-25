@@ -6,7 +6,6 @@ import App from "./App.jsx";
 import { ConfigProvider } from "antd";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import zhCN from "antd/locale/zh_CN";
-import LogOut from "./pages/logOut.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Router>

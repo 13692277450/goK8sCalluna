@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import {React, useEffect, useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -86,12 +86,12 @@ const itemsMenuData = [
     label: withTooltip("SYSTEM MANAGE"),
     children: [
       {
-        icon: <PieChartOutlined style={{ color: "red" }} />,
+        icon: <PieChartOutlined style={{ color: "white" }} />,
         key: "/admin/system_status",
         label: withTooltip("SYSTEM STATUS"),
       },
       {
-        icon: <DashboardFilled style={{ color: "orange" }} />,
+        icon: <DashboardFilled style={{ color: "red" }} />,
         key: "/admin/cluster_status",
         label: withTooltip("CLUSTER STATUS"),
       },
@@ -99,6 +99,11 @@ const itemsMenuData = [
         icon: <PicLeftOutlined style={{ color: "orange" }} />,
         key: "/admin/pods_status",
         label: withTooltip("PODS STATUS"),
+      },
+           {
+        icon: <PicLeftOutlined style={{ color: "cyan" }} />,
+        key: "/admin/network_status",
+        label: withTooltip("Network STATUS"),
       },
     ],
   },
@@ -289,7 +294,7 @@ const Mylayout = ({ children }) => {
               height: 64,
             }}
           />
-          <span className="titleDiv">KUBERNETS MANAGE SYSTEM - Ver 0.1     </span> <span style={{color:'blue', textAlign:'center'}}> <Space/><Space/>      Author: Mang Zhang</span>
+          <span className="titleDiv">KUBERNETS MANAGE SYSTEM - Ver 0.1     </span> <span style={{color:'blue', textAlign:'center'}}> <Space/><Space/>      Author: Mang Zhang    Last update: 11/25/2025</span>
           <Dropdown menu={{ items, onClick }}>
             <a
               onClick={(e) => e.preventDefault()}
