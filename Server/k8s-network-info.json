@@ -1,0 +1,1318 @@
+{
+  "pods": [
+    {
+      "name": "grafana-86b66d556-j27c4",
+      "namespace": "default",
+      "podIP": "10.244.0.70",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app": "grafana",
+        "pod-template-hash": "86b66d556"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "grafana",
+          "image": "grafana/grafana:8.3.3",
+          "ports": [
+            {
+              "containerPort": 3000,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-06T15:11:56Z"
+    },
+    {
+      "name": "nginx-deploymentweb-7f96cfd4d7-q66pr",
+      "namespace": "default",
+      "podIP": "10.244.0.79",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app": "nginx",
+        "pod-template-hash": "7f96cfd4d7"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "nginx",
+          "image": "nginx:latest",
+          "ports": [
+            {
+              "containerPort": 80,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-05T06:47:02Z"
+    },
+    {
+      "name": "pod12",
+      "namespace": "default",
+      "podIP": "10.244.0.75",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": null,
+      "annotations": null,
+      "containers": [
+        {
+          "name": "test-container",
+          "image": "nginx:latest",
+          "ports": [
+            {
+              "containerPort": 80,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T14:10:28Z"
+    },
+    {
+      "name": "prometheus-6dbb748b56-vlkb5",
+      "namespace": "default",
+      "podIP": "10.244.0.73",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app": "prometheus",
+        "pod-template-hash": "6dbb748b56"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "prometheus",
+          "image": "prom/prometheus:v2.30.3",
+          "ports": [
+            {
+              "containerPort": 9090,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-06T14:15:12Z"
+    },
+    {
+      "name": "prometheus-6dbb748b56-wddwz",
+      "namespace": "default",
+      "podIP": "10.244.0.80",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app": "prometheus",
+        "pod-template-hash": "6dbb748b56"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "prometheus",
+          "image": "prom/prometheus:v2.30.3",
+          "ports": [
+            {
+              "containerPort": 9090,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-06T14:15:12Z"
+    },
+    {
+      "name": "test-pod1122",
+      "namespace": "default",
+      "podIP": "10.244.0.81",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": null,
+      "annotations": null,
+      "containers": [
+        {
+          "name": "test-container",
+          "image": "nginx:latest",
+          "ports": [
+            {
+              "containerPort": 80,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T14:10:06Z"
+    },
+    {
+      "name": "test-pod123",
+      "namespace": "default",
+      "podIP": "10.244.0.74",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": null,
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"name\":\"test-pod123\",\"namespace\":\"default\"},\"spec\":{\"containers\":[{\"image\":\"nginx:latest\",\"name\":\"test-container\",\"ports\":[{\"containerPort\":80}]}],\"nodeSelector\":{\"node-role.kubernetes.io/control-plane\":\"\"},\"tolerations\":[{\"effect\":\"NoSchedule\",\"key\":\"node-role.kubernetes.io/control-plane\",\"operator\":\"Equal\",\"value\":\"\"}]}}\n"
+      },
+      "containers": [
+        {
+          "name": "test-container",
+          "image": "nginx:latest",
+          "ports": [
+            {
+              "containerPort": 80,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T14:05:52Z"
+    },
+    {
+      "name": "kube-flannel-ds-t5x99",
+      "namespace": "kube-flannel",
+      "podIP": "104.168.125.34",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app": "flannel",
+        "controller-revision-hash": "6dbf467c8",
+        "pod-template-generation": "1",
+        "tier": "node"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "kube-flannel",
+          "image": "ghcr.io/flannel-io/flannel:v0.27.4",
+          "ports": null,
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T11:48:49Z"
+    },
+    {
+      "name": "coredns-66bc5c9577-9fp5v",
+      "namespace": "kube-system",
+      "podIP": "10.244.0.76",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "k8s-app": "kube-dns",
+        "pod-template-hash": "66bc5c9577"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "coredns",
+          "image": "registry.k8s.io/coredns/coredns:v1.12.1",
+          "ports": [
+            {
+              "name": "dns",
+              "containerPort": 53,
+              "protocol": "UDP"
+            },
+            {
+              "name": "dns-tcp",
+              "containerPort": 53,
+              "protocol": "TCP"
+            },
+            {
+              "name": "metrics",
+              "containerPort": 9153,
+              "protocol": "TCP"
+            },
+            {
+              "name": "liveness-probe",
+              "containerPort": 8080,
+              "protocol": "TCP"
+            },
+            {
+              "name": "readiness-probe",
+              "containerPort": 8181,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T06:41:22Z"
+    },
+    {
+      "name": "coredns-66bc5c9577-ljg8h",
+      "namespace": "kube-system",
+      "podIP": "10.244.0.71",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "k8s-app": "kube-dns",
+        "pod-template-hash": "66bc5c9577"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "coredns",
+          "image": "registry.k8s.io/coredns/coredns:v1.12.1",
+          "ports": [
+            {
+              "name": "dns",
+              "containerPort": 53,
+              "protocol": "UDP"
+            },
+            {
+              "name": "dns-tcp",
+              "containerPort": 53,
+              "protocol": "TCP"
+            },
+            {
+              "name": "metrics",
+              "containerPort": 9153,
+              "protocol": "TCP"
+            },
+            {
+              "name": "liveness-probe",
+              "containerPort": 8080,
+              "protocol": "TCP"
+            },
+            {
+              "name": "readiness-probe",
+              "containerPort": 8181,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T06:41:22Z"
+    },
+    {
+      "name": "etcd-k8s-master01",
+      "namespace": "kube-system",
+      "podIP": "104.168.125.34",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "component": "etcd",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubeadm.kubernetes.io/etcd.advertise-client-urls": "https://104.168.125.34:2379",
+        "kubernetes.io/config.hash": "bd22ab6af0f28bf003109ba04bc2c24c",
+        "kubernetes.io/config.mirror": "bd22ab6af0f28bf003109ba04bc2c24c",
+        "kubernetes.io/config.seen": "2025-11-04T00:41:18.069114453-06:00",
+        "kubernetes.io/config.source": "file"
+      },
+      "containers": [
+        {
+          "name": "etcd",
+          "image": "registry.k8s.io/etcd:3.6.4-0",
+          "ports": [
+            {
+              "name": "probe-port",
+              "hostPort": 2381,
+              "containerPort": 2381,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T06:41:18Z"
+    },
+    {
+      "name": "kube-apiserver-k8s-master01",
+      "namespace": "kube-system",
+      "podIP": "104.168.125.34",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "component": "kube-apiserver",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint": "104.168.125.34:6443",
+        "kubernetes.io/config.hash": "5245c78d169878bd6a4e242b41ebfe1e",
+        "kubernetes.io/config.mirror": "5245c78d169878bd6a4e242b41ebfe1e",
+        "kubernetes.io/config.seen": "2025-11-04T00:41:18.069129592-06:00",
+        "kubernetes.io/config.source": "file"
+      },
+      "containers": [
+        {
+          "name": "kube-apiserver",
+          "image": "registry.k8s.io/kube-apiserver:v1.34.1",
+          "ports": [
+            {
+              "name": "probe-port",
+              "hostPort": 6443,
+              "containerPort": 6443,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T06:41:18Z"
+    },
+    {
+      "name": "kube-controller-manager-k8s-master01",
+      "namespace": "kube-system",
+      "podIP": "104.168.125.34",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "component": "kube-controller-manager",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubernetes.io/config.hash": "197fc56419707d6e7fe0205fce1734cb",
+        "kubernetes.io/config.mirror": "197fc56419707d6e7fe0205fce1734cb",
+        "kubernetes.io/config.seen": "2025-11-04T00:41:18.069133129-06:00",
+        "kubernetes.io/config.source": "file"
+      },
+      "containers": [
+        {
+          "name": "kube-controller-manager",
+          "image": "registry.k8s.io/kube-controller-manager:v1.34.1",
+          "ports": [
+            {
+              "name": "probe-port",
+              "hostPort": 10257,
+              "containerPort": 10257,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T06:41:18Z"
+    },
+    {
+      "name": "kube-proxy-5kjl9",
+      "namespace": "kube-system",
+      "podIP": "104.168.125.34",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "controller-revision-hash": "66486579fc",
+        "k8s-app": "kube-proxy",
+        "pod-template-generation": "1"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "kube-proxy",
+          "image": "registry.k8s.io/kube-proxy:v1.34.1",
+          "ports": null,
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T06:41:22Z"
+    },
+    {
+      "name": "kube-scheduler-k8s-master01",
+      "namespace": "kube-system",
+      "podIP": "104.168.125.34",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "component": "kube-scheduler",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubernetes.io/config.hash": "462aa628a93f24d903b699296f067ea4",
+        "kubernetes.io/config.mirror": "462aa628a93f24d903b699296f067ea4",
+        "kubernetes.io/config.seen": "2025-11-04T00:41:04.063514554-06:00",
+        "kubernetes.io/config.source": "file"
+      },
+      "containers": [
+        {
+          "name": "kube-scheduler",
+          "image": "registry.k8s.io/kube-scheduler:v1.34.1",
+          "ports": [
+            {
+              "name": "probe-port",
+              "hostPort": 10259,
+              "containerPort": 10259,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T06:41:15Z"
+    },
+    {
+      "name": "metrics-server-767879b875-dhsq2",
+      "namespace": "kube-system",
+      "podIP": "10.244.0.85",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "k8s-app": "metrics-server",
+        "pod-template-hash": "767879b875"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "metrics-server",
+          "image": "registry.cn-hangzhou.aliyuncs.com/rainux/metrics-server:v0.6.4",
+          "ports": [
+            {
+              "name": "https",
+              "containerPort": 10250,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-04T12:41:42Z"
+    },
+    {
+      "name": "kubernetes-dashboard-api-cb964f474-fdvx4",
+      "namespace": "kubernetes-dashboard",
+      "podIP": "10.244.0.78",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app.kubernetes.io/component": "api",
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "kubernetes-dashboard-api",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard",
+        "app.kubernetes.io/version": "1.14.0",
+        "helm.sh/chart": "kubernetes-dashboard-7.14.0",
+        "pod-template-hash": "cb964f474"
+      },
+      "annotations": {
+        "checksum/config": "7af0811e299395fa923881c249578ee9a5d4e3f2ac10434fc16a79070f9ccae3"
+      },
+      "containers": [
+        {
+          "name": "kubernetes-dashboard-api",
+          "image": "docker.io/kubernetesui/dashboard-api:1.14.0",
+          "ports": [
+            {
+              "name": "api",
+              "containerPort": 8000,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-05T05:04:39Z"
+    },
+    {
+      "name": "kubernetes-dashboard-auth-7676586b6b-h49mx",
+      "namespace": "kubernetes-dashboard",
+      "podIP": "10.244.0.69",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app.kubernetes.io/component": "auth",
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "kubernetes-dashboard-auth",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard",
+        "app.kubernetes.io/version": "1.4.0",
+        "helm.sh/chart": "kubernetes-dashboard-7.14.0",
+        "pod-template-hash": "7676586b6b"
+      },
+      "annotations": {
+        "checksum/config": "b255f31e3b63f2dcdbba05f2997f3e71a7a437c8009f1cc4844e1d153d3bbad2"
+      },
+      "containers": [
+        {
+          "name": "kubernetes-dashboard-auth",
+          "image": "docker.io/kubernetesui/dashboard-auth:1.4.0",
+          "ports": [
+            {
+              "name": "auth",
+              "containerPort": 8000,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-05T05:04:39Z"
+    },
+    {
+      "name": "kubernetes-dashboard-kong-9849c64bd-5sk2d",
+      "namespace": "kubernetes-dashboard",
+      "podIP": "10.244.0.83",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app": "kubernetes-dashboard-kong",
+        "app.kubernetes.io/component": "app",
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "kong",
+        "app.kubernetes.io/version": "3.9",
+        "helm.sh/chart": "kong-2.52.0",
+        "pod-template-hash": "9849c64bd",
+        "version": "3.9"
+      },
+      "annotations": {
+        "kuma.io/gateway": "enabled",
+        "kuma.io/service-account-token-volume": "kubernetes-dashboard-kong-token",
+        "traffic.sidecar.istio.io/includeInboundPorts": ""
+      },
+      "containers": [
+        {
+          "name": "proxy",
+          "image": "kong:3.9",
+          "ports": [
+            {
+              "name": "proxy-tls",
+              "containerPort": 8443,
+              "protocol": "TCP"
+            },
+            {
+              "name": "status",
+              "containerPort": 8100,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-05T05:04:39Z"
+    },
+    {
+      "name": "kubernetes-dashboard-metrics-scraper-7685fd8b77-wpc8b",
+      "namespace": "kubernetes-dashboard",
+      "podIP": "10.244.0.72",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app.kubernetes.io/component": "metrics-scraper",
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "kubernetes-dashboard-metrics-scraper",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard",
+        "app.kubernetes.io/version": "1.2.2",
+        "helm.sh/chart": "kubernetes-dashboard-7.14.0",
+        "pod-template-hash": "7685fd8b77"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "kubernetes-dashboard-metrics-scraper",
+          "image": "docker.io/kubernetesui/dashboard-metrics-scraper:1.2.2",
+          "ports": [
+            {
+              "containerPort": 8000,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-05T05:04:39Z"
+    },
+    {
+      "name": "kubernetes-dashboard-web-5c9f966b98-5qcqq",
+      "namespace": "kubernetes-dashboard",
+      "podIP": "10.244.0.82",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app.kubernetes.io/component": "web",
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "kubernetes-dashboard-web",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard",
+        "app.kubernetes.io/version": "1.7.0",
+        "helm.sh/chart": "kubernetes-dashboard-7.14.0",
+        "pod-template-hash": "5c9f966b98"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "kubernetes-dashboard-web",
+          "image": "docker.io/kubernetesui/dashboard-web:1.7.0",
+          "ports": [
+            {
+              "name": "web",
+              "containerPort": 8000,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-05T05:04:39Z"
+    },
+    {
+      "name": "kube-state-metrics-6bc59479b6-xnl7v",
+      "namespace": "prometheus",
+      "podIP": "10.244.0.86",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "app": "kube-state-metrics",
+        "pod-template-hash": "6bc59479b6"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "kube-state-metrics",
+          "image": "registry.cn-wulanchabu.aliyuncs.com/moge1/kube-state-metrics:v2.3.1",
+          "ports": [
+            {
+              "containerPort": 8080,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-07T15:40:41Z"
+    },
+    {
+      "name": "node-exporter-gqqt5",
+      "namespace": "prometheus",
+      "podIP": "104.168.125.34",
+      "hostIP": "104.168.125.34",
+      "status": "Running",
+      "labels": {
+        "controller-revision-hash": "546dfd7667",
+        "name": "node-exporter",
+        "pod-template-generation": "1"
+      },
+      "annotations": null,
+      "containers": [
+        {
+          "name": "node-exporter",
+          "image": "prom/node-exporter:v0.16.0",
+          "ports": [
+            {
+              "hostPort": 9100,
+              "containerPort": 9100,
+              "protocol": "TCP"
+            }
+          ],
+          "ready": true
+        }
+      ],
+      "nodeName": "k8s-master01",
+      "creationTimestamp": "2025-11-07T02:53:49Z"
+    }
+  ],
+  "services": [
+    {
+      "name": "grafana",
+      "namespace": "default",
+      "type": "NodePort",
+      "clusterIP": "10.103.26.1",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "",
+          "port": 3000,
+          "targetPort": "3000",
+          "nodePort": 30001,
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app": "grafana"
+      },
+      "endpoints": [
+        {
+          "podName": "grafana-86b66d556-j27c4",
+          "podIP": "10.244.0.70",
+          "ports": [
+            "TCP:3000"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "app": "grafana"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"grafana\"},\"name\":\"grafana\",\"namespace\":\"default\"},\"spec\":{\"ports\":[{\"nodePort\":30001,\"port\":3000,\"targetPort\":3000}],\"selector\":{\"app\":\"grafana\"},\"type\":\"NodePort\"}}\n"
+      }
+    },
+    {
+      "name": "kubernetes",
+      "namespace": "default",
+      "type": "ClusterIP",
+      "clusterIP": "10.96.0.1",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "https",
+          "port": 443,
+          "targetPort": "6443",
+          "protocol": "TCP"
+        }
+      ],
+      "selector": null,
+      "endpoints": [
+        {
+          "podName": "",
+          "podIP": "104.168.125.34",
+          "ports": [
+            "TCP:6443"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "component": "apiserver",
+        "provider": "kubernetes"
+      },
+      "annotations": null
+    },
+    {
+      "name": "nginx-nodeport",
+      "namespace": "default",
+      "type": "NodePort",
+      "clusterIP": "10.110.120.55",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "",
+          "port": 80,
+          "targetPort": "80",
+          "nodePort": 30080,
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app": "nginx"
+      },
+      "endpoints": [
+        {
+          "podName": "nginx-deploymentweb-7f96cfd4d7-q66pr",
+          "podIP": "10.244.0.79",
+          "ports": [
+            "TCP:80"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": null,
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"name\":\"nginx-nodeport\",\"namespace\":\"default\"},\"spec\":{\"ports\":[{\"port\":80,\"protocol\":\"TCP\",\"targetPort\":80}],\"selector\":{\"app\":\"nginx\"},\"type\":\"NodePort\"}}\n"
+      }
+    },
+    {
+      "name": "prometheus",
+      "namespace": "default",
+      "type": "NodePort",
+      "clusterIP": "10.108.241.67",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "",
+          "port": 9090,
+          "targetPort": "9090",
+          "nodePort": 30090,
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app": "prometheus"
+      },
+      "endpoints": [
+        {
+          "podName": "prometheus-6dbb748b56-vlkb5",
+          "podIP": "10.244.0.73",
+          "ports": [
+            "TCP:9090"
+          ],
+          "ready": true
+        },
+        {
+          "podName": "prometheus-6dbb748b56-wddwz",
+          "podIP": "10.244.0.80",
+          "ports": [
+            "TCP:9090"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "app": "prometheus"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"prometheus\"},\"name\":\"prometheus\",\"namespace\":\"default\"},\"spec\":{\"ports\":[{\"nodePort\":30090,\"port\":9090,\"targetPort\":9090}],\"selector\":{\"app\":\"prometheus\"},\"type\":\"NodePort\"}}\n"
+      }
+    },
+    {
+      "name": "kube-dns",
+      "namespace": "kube-system",
+      "type": "ClusterIP",
+      "clusterIP": "10.96.0.10",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "dns",
+          "port": 53,
+          "targetPort": "53",
+          "protocol": "UDP"
+        },
+        {
+          "name": "dns-tcp",
+          "port": 53,
+          "targetPort": "53",
+          "protocol": "TCP"
+        },
+        {
+          "name": "metrics",
+          "port": 9153,
+          "targetPort": "9153",
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "k8s-app": "kube-dns"
+      },
+      "endpoints": [
+        {
+          "podName": "coredns-66bc5c9577-ljg8h",
+          "podIP": "10.244.0.71",
+          "ports": [
+            "TCP:53",
+            "UDP:53",
+            "TCP:9153"
+          ],
+          "ready": true
+        },
+        {
+          "podName": "coredns-66bc5c9577-9fp5v",
+          "podIP": "10.244.0.76",
+          "ports": [
+            "TCP:53",
+            "UDP:53",
+            "TCP:9153"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "k8s-app": "kube-dns",
+        "kubernetes.io/cluster-service": "true",
+        "kubernetes.io/name": "CoreDNS"
+      },
+      "annotations": {
+        "prometheus.io/port": "9153",
+        "prometheus.io/scrape": "true"
+      }
+    },
+    {
+      "name": "metrics-server",
+      "namespace": "kube-system",
+      "type": "ClusterIP",
+      "clusterIP": "10.110.170.138",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "https",
+          "port": 443,
+          "targetPort": "https",
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "k8s-app": "metrics-server"
+      },
+      "endpoints": [
+        {
+          "podName": "metrics-server-767879b875-dhsq2",
+          "podIP": "10.244.0.85",
+          "ports": [
+            "TCP:10250"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "k8s-app": "metrics-server"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"k8s-app\":\"metrics-server\"},\"name\":\"metrics-server\",\"namespace\":\"kube-system\"},\"spec\":{\"ports\":[{\"appProtocol\":\"https\",\"name\":\"https\",\"port\":443,\"protocol\":\"TCP\",\"targetPort\":\"https\"}],\"selector\":{\"k8s-app\":\"metrics-server\"}}}\n"
+      }
+    },
+    {
+      "name": "kubernetes-dashboard-api",
+      "namespace": "kubernetes-dashboard",
+      "type": "ClusterIP",
+      "clusterIP": "10.106.159.232",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "api",
+          "port": 8000,
+          "targetPort": "8000",
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/name": "kubernetes-dashboard-api",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard"
+      },
+      "endpoints": [
+        {
+          "podName": "kubernetes-dashboard-api-cb964f474-fdvx4",
+          "podIP": "10.244.0.78",
+          "ports": [
+            "TCP:8000"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "app.kubernetes.io/component": "api",
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "kubernetes-dashboard-api",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard",
+        "app.kubernetes.io/version": "1.14.0",
+        "helm.sh/chart": "kubernetes-dashboard-7.14.0"
+      },
+      "annotations": {
+        "meta.helm.sh/release-name": "kubernetes-dashboard",
+        "meta.helm.sh/release-namespace": "kubernetes-dashboard"
+      }
+    },
+    {
+      "name": "kubernetes-dashboard-auth",
+      "namespace": "kubernetes-dashboard",
+      "type": "ClusterIP",
+      "clusterIP": "10.108.5.189",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "auth",
+          "port": 8000,
+          "targetPort": "8000",
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/name": "kubernetes-dashboard-auth",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard"
+      },
+      "endpoints": [
+        {
+          "podName": "kubernetes-dashboard-auth-7676586b6b-h49mx",
+          "podIP": "10.244.0.69",
+          "ports": [
+            "TCP:8000"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "app.kubernetes.io/component": "auth",
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "kubernetes-dashboard-auth",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard",
+        "app.kubernetes.io/version": "1.4.0",
+        "helm.sh/chart": "kubernetes-dashboard-7.14.0"
+      },
+      "annotations": {
+        "meta.helm.sh/release-name": "kubernetes-dashboard",
+        "meta.helm.sh/release-namespace": "kubernetes-dashboard"
+      }
+    },
+    {
+      "name": "kubernetes-dashboard-kong-proxy",
+      "namespace": "kubernetes-dashboard",
+      "type": "ClusterIP",
+      "clusterIP": "10.109.218.51",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "kong-proxy-tls",
+          "port": 443,
+          "targetPort": "8443",
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app.kubernetes.io/component": "app",
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/name": "kong"
+      },
+      "endpoints": [
+        {
+          "podName": "kubernetes-dashboard-kong-9849c64bd-5sk2d",
+          "podIP": "10.244.0.83",
+          "ports": [
+            "TCP:8443"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "kong",
+        "app.kubernetes.io/version": "3.9",
+        "enable-metrics": "true",
+        "helm.sh/chart": "kong-2.52.0"
+      },
+      "annotations": {
+        "meta.helm.sh/release-name": "kubernetes-dashboard",
+        "meta.helm.sh/release-namespace": "kubernetes-dashboard"
+      }
+    },
+    {
+      "name": "kubernetes-dashboard-metrics-scraper",
+      "namespace": "kubernetes-dashboard",
+      "type": "ClusterIP",
+      "clusterIP": "10.103.250.182",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "",
+          "port": 8000,
+          "targetPort": "8000",
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/name": "kubernetes-dashboard-metrics-scraper",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard"
+      },
+      "endpoints": [
+        {
+          "podName": "kubernetes-dashboard-metrics-scraper-7685fd8b77-wpc8b",
+          "podIP": "10.244.0.72",
+          "ports": [
+            "TCP:8000"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "app.kubernetes.io/component": "metrics-scraper",
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "kubernetes-dashboard-metrics-scraper",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard",
+        "app.kubernetes.io/version": "1.2.2",
+        "helm.sh/chart": "kubernetes-dashboard-7.14.0"
+      },
+      "annotations": {
+        "meta.helm.sh/release-name": "kubernetes-dashboard",
+        "meta.helm.sh/release-namespace": "kubernetes-dashboard"
+      }
+    },
+    {
+      "name": "kubernetes-dashboard-nodeport",
+      "namespace": "kubernetes-dashboard",
+      "type": "NodePort",
+      "clusterIP": "10.100.91.40",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "",
+          "port": 443,
+          "targetPort": "443",
+          "nodePort": 30443,
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app": "kubernetes-dashboard-kong"
+      },
+      "endpoints": [
+        {
+          "podName": "kubernetes-dashboard-kong-9849c64bd-5sk2d",
+          "podIP": "10.244.0.83",
+          "ports": [
+            "TCP:443"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": null,
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"name\":\"kubernetes-dashboard-nodeport\",\"namespace\":\"kubernetes-dashboard\"},\"spec\":{\"ports\":[{\"nodePort\":30443,\"port\":443,\"protocol\":\"TCP\",\"targetPort\":443}],\"selector\":{\"app\":\"kubernetes-dashboard-kong\"},\"type\":\"NodePort\"}}\n"
+      }
+    },
+    {
+      "name": "kubernetes-dashboard-web",
+      "namespace": "kubernetes-dashboard",
+      "type": "ClusterIP",
+      "clusterIP": "10.110.152.119",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "web",
+          "port": 8000,
+          "targetPort": "8000",
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/name": "kubernetes-dashboard-web",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard"
+      },
+      "endpoints": [
+        {
+          "podName": "kubernetes-dashboard-web-5c9f966b98-5qcqq",
+          "podIP": "10.244.0.82",
+          "ports": [
+            "TCP:8000"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "app.kubernetes.io/component": "web",
+        "app.kubernetes.io/instance": "kubernetes-dashboard",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "kubernetes-dashboard-web",
+        "app.kubernetes.io/part-of": "kubernetes-dashboard",
+        "app.kubernetes.io/version": "1.7.0",
+        "helm.sh/chart": "kubernetes-dashboard-7.14.0"
+      },
+      "annotations": {
+        "meta.helm.sh/release-name": "kubernetes-dashboard",
+        "meta.helm.sh/release-namespace": "kubernetes-dashboard"
+      }
+    },
+    {
+      "name": "kube-state-metrics",
+      "namespace": "prometheus",
+      "type": "ClusterIP",
+      "clusterIP": "10.106.39.209",
+      "externalIPs": null,
+      "ports": [
+        {
+          "name": "kube-state-metrics",
+          "port": 8080,
+          "targetPort": "8080",
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app": "kube-state-metrics"
+      },
+      "endpoints": [
+        {
+          "podName": "kube-state-metrics-6bc59479b6-xnl7v",
+          "podIP": "10.244.0.86",
+          "ports": [
+            "TCP:8080"
+          ],
+          "ready": true
+        }
+      ],
+      "labels": {
+        "app": "kube-state-metrics"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{\"prometheus.io/scrape\":\"true\"},\"labels\":{\"app\":\"kube-state-metrics\"},\"name\":\"kube-state-metrics\",\"namespace\":\"prometheus\"},\"spec\":{\"ports\":[{\"name\":\"kube-state-metrics\",\"port\":8080,\"protocol\":\"TCP\"}],\"selector\":{\"app\":\"kube-state-metrics\"}}}\n",
+        "prometheus.io/scrape": "true"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "name": "k8s-master01",
+      "internalIP": "104.168.125.34",
+      "externalIP": "",
+      "hostname": "k8s-master01",
+      "os": "linux Rocky Linux 9.6 (Blue Onyx)",
+      "kernelVersion": "5.14.0-570.55.1.el9_6.x86_64",
+      "containerRuntime": "containerd://2.1.5",
+      "kubeletVersion": "v1.34.1",
+      "podCIDR": "10.244.0.0/24",
+      "conditions": [
+        {
+          "type": "NetworkUnavailable",
+          "status": "False",
+          "message": "Flannel is running on this node"
+        },
+        {
+          "type": "MemoryPressure",
+          "status": "False",
+          "message": "kubelet has sufficient memory available"
+        },
+        {
+          "type": "DiskPressure",
+          "status": "False",
+          "message": "kubelet has no disk pressure"
+        },
+        {
+          "type": "PIDPressure",
+          "status": "False",
+          "message": "kubelet has sufficient PID available"
+        },
+        {
+          "type": "Ready",
+          "status": "True",
+          "message": "kubelet is posting ready status"
+        }
+      ],
+      "labels": {
+        "beta.kubernetes.io/arch": "amd64",
+        "beta.kubernetes.io/os": "linux",
+        "kubernetes.io/arch": "amd64",
+        "kubernetes.io/hostname": "k8s-master01",
+        "kubernetes.io/os": "linux",
+        "node-role.kubernetes.io/control-plane": "",
+        "node.kubernetes.io/exclude-from-external-load-balancers": ""
+      },
+      "annotations": {
+        "flannel.alpha.coreos.com/backend-data": "{\"VNI\":1,\"VtepMAC\":\"8e:03:18:0e:44:be\"}",
+        "flannel.alpha.coreos.com/backend-type": "vxlan",
+        "flannel.alpha.coreos.com/kube-subnet-manager": "true",
+        "flannel.alpha.coreos.com/public-ip": "104.168.125.34",
+        "node.alpha.kubernetes.io/ttl": "0",
+        "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+      }
+    }
+  ],
+  "cniInfo": {
+    "cniConfig": "",
+    "networkPlugins": [
+      "kube-flannel-ds"
+    ]
+  }
+}

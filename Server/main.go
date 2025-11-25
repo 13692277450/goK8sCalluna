@@ -19,6 +19,7 @@ import (
 	"gok8s/kubernetsServ"
 	"gok8s/models"
 	"gok8s/routers"
+	"gok8s/serverServices"
 	"text/template"
 	"time"
 
@@ -95,7 +96,11 @@ func main() {
 	routers.PVCRoutersInit(r)
 	routers.MetricsRoutersInit(r)
 	routers.ServicesRoutersInit(r)
+	routers.NetworkInfoRoutersInit(r)
+	kubernetsServ.GetEtcdInfo()
+	kubernetsServ.GetEtcdLogs("kube-apiserver-k8s-master01")
 
+	serverServices.NewK8sNetworkCollector()
 	// Check routers registration
 	// routes := r.Routes()
 	// for _, route := range routes {
