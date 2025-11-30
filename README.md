@@ -1,3 +1,6 @@
+<img width="1020" height="261" alt="image" src="https://github.com/user-attachments/assets/cf218a60-257f-42e3-bae6-5e0b6a9c4dea" />
+
+
 ## **GoK8sCalluna - K8s Manage Tool**
 
 Front and backend full stack design. server code can running on Server or client, because it use .kube\\config file in Golang code with embed file block, but later I should conside kubeconfig was changed and how to get fresh config from server directely.
