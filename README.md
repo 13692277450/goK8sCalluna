@@ -72,4 +72,8 @@ The username and password to access Prometheus and Grafana: username: admin, pas
 
 <img width="2543" height="1527" alt="image" src="https://github.com/user-attachments/assets/d5d23600-72cb-4ea6-a7b9-eedd71f2e63b" class="jop-noMdConv"> <img width="2518" height="1504" alt="image" src="https://github.com/user-attachments/assets/5fa5161a-b23e-42fa-874f-1c2b6ad9e0f6" class="jop-noMdConv">
 
+#If you like and support this project, pls conside support me by below link:
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/mangzhang)
+
 License: MIT License.
