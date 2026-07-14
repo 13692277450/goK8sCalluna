@@ -7,6 +7,11 @@ Front and backend full stack design. server code can running on Server or client
 
 K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Docker, Ubuntu, Metrics-server, Prometheus, Grafana, this project plan build an excellent K8s management tool in the next two years, pls kindly support me and join together if you are sinteresting! Thanks. Now, it can get Pods info and show, resources info, log info, deploy pod..., I will continue update.
 
+## **If you like and support this project, pls conside support me by below link:**
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/mangzhang)
+
+
 ## **DEMO address:  http://104.168.125.34/index.html (a little bit slow as server resources limited.)**
 The username and password to access Prometheus and Grafana: username: admin, password: 868686msM
 
