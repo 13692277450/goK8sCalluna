@@ -12,7 +12,7 @@ K8s manage tool build by Golang，React, Vite, Ant-D, Js, CSS, Mysql, K8s, Docke
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/mangzhang)
 
 
-## **DEMO address:  https://104.168.125.34/index.html (a little bit slow as server resources limited.)**
+## **DEMO address:  [https://104.168.125.34/index.html](https://www.aipercy.top/gok8scalluna/index.html) (a little bit slow as server resources limited.)**
 The username and password to access Prometheus and Grafana: username: admin, password: 868686msM
 
 <span style="color: #843fa1;">**How to run this application? so easy, 5 steps only:**</span>
